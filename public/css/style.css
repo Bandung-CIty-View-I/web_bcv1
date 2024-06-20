@@ -1,0 +1,251 @@
+:root {
+  --bs-body-bg: #f8f2f0;
+}
+
+.navbar {
+  background-color: #394e69;
+  color: #fafafa;
+}
+
+.navbar .btn {
+  color: #fefefe;
+  background-color: transparent;
+  border-width: 0;
+  border-radius: 0;
+}
+
+.navbar .btn:hover {
+  color: #c0bec6;
+}
+
+.navbar .form-control {
+  outline: none !important;
+  border: 1px solid transparent;
+  border-radius: 0;
+  background: transparent;
+  caret-color: #e7e5ec;
+  color: #fafafa;
+}
+
+.navbar .form-control:focus {
+  outline: none !important;
+  border: none;
+  box-shadow: none !important;
+  border-bottom: 1px solid #7695bf;
+}
+
+.navbar .form-control::placeholder {
+  color: #f2f0f6;
+}
+
+.navbar-brand {
+  font-weight: bold;
+  margin-right: 4em;
+}
+
+.navbar-brand:hover {
+  color: #f4d772;
+}
+
+.navbar .nav-item {
+  position: relative;
+}
+
+.navbar .nav-link.active {
+  color: yellow;
+}
+
+.nav-link,
+.nav-link:hover {
+  color: white;
+}
+
+.nav-link.active,
+.nav-link.active:hover {
+  color: yellow;
+}
+
+.sidebar-card.card {
+  background-color: #394e69;
+}
+
+.sidebar-card img {
+  width: 100px;
+  height: 100px;
+  object-fit: cover;
+  border-radius: 50%;
+}
+
+.sidebar-card .list-group {
+  margin: 0 -1em;
+}
+
+.sidebar-card .card-title {
+  color: #f2f0f6;
+}
+
+.main-nav .search-btn {
+  color: #000;
+  border-right: 1px solid #ada7a7;
+}
+
+.main-nav .search-btn:focus,
+.main-nav .search-btn:active,
+.main-nav .search-btn:hover {
+  color: #ada7a7;
+  background: #fff;
+  border-color: transparent;
+}
+
+.main-nav .search-input {
+  outline: none !important;
+  border: none !important;
+  box-shadow: none !important;
+  background: #fff;
+  caret-color: #555;
+  color: #555;
+}
+
+.main-nav .search-input:focus {
+  outline: none !important;
+  border: none;
+  box-shadow: none !important;
+}
+
+.main-nav .search-input::placeholder {
+  color: #555;
+}
+
+.main .card {
+  margin-top: 2em;
+  margin-bottom: 2em;
+}
+
+.main .card .card-title {
+  background-color: #f8f7fa;
+  padding: 1em 1.5em;
+  color: #636364;
+}
+
+.main .table thead {
+  color: #a2a1a3;
+  background-color: #f8f7fa;
+}
+
+.main .table td,
+.main .table th {
+  padding: 0.8em 1em;
+}
+
+.interactive-circle {
+  display: inline-block;
+  cursor: pointer;
+  border-radius: 50%;
+  padding: 10px; 
+  background-color: #ffffff; 
+}
+
+/* Styles for home.blade.php */
+.content {
+  margin-top: 18vh;
+  color: azure;
+}
+.empty-column {
+  background-color: #C4C4C4;
+  position: absolute;
+  top: 56px; /* Adjusted to be right below the navbar */
+  left: 50%;
+  width: 50%;
+  height: calc(100vh - 56px); /* Adjust height to fill the page below the navbar */
+  border-top-left-radius: 80px;
+}
+
+@media (max-width: 992px) {
+  body {
+    background: #F8F2F0 !important; 
+  }
+  .image-container {
+    display: none; 
+  }
+}
+
+@media (max-width: 1200px) {
+  .empty-column {
+    left: 60%;
+    width: 40%;
+  }
+}
+
+@media (max-width: 992px) {
+  .empty-column {
+    left: 70%;
+    width: 30%;
+  }
+}
+
+@media (max-width: 768px) {
+  .content {
+    margin-top: 10vh;
+    text-align: center;
+    padding: 0 20px;
+  }
+  .empty-column {
+    position: absolute;
+    top: 56px;
+    left: 0;
+    height: auto;
+    width: 100%;
+    border-top-left-radius: 0;
+    border-radius: 0;
+    z-index: 1;
+  }
+  .content h2 {
+    font-size: 5vh;
+  }
+}
+.input-custom {
+  background-color: rgba(255, 255, 255, 0); 
+  border: 1px solid black; 
+  color: #fff;
+  width: 100%; 
+  max-width: 400px;
+  padding: 0.5rem 1rem;
+  transition: background-color 0.3s ease, border-color 0.3s ease;
+}
+
+.input-custom:focus {
+  background-color: rgba(255, 255, 255, 0.2);
+  border-color: rgba(255, 255, 255, 0.7);
+  outline: none;
+}
+
+.input-custom::placeholder {
+  color: rgba(255, 255, 255, 0.7);
+}
+
+.input-custom option {
+  background-color: rgba(0, 0, 0, 0.8); /* Background option */
+  color: #fff; /* Warna teks */
+}
+
+.btn-custom {
+  background-color: #28a745;
+  border: none;
+}
+
+.input-custom:focus {
+  background-color: rgba(255, 255, 255, 0.2);
+  border-color: rgba(255, 255, 255, 0.7);
+  outline: none;
+}
+
+.btn-custom:hover {
+  background-color: #218838;
+}
+
+
+@media (max-width: 768px) {
+  .input-custom {
+      max-width: 100%; 
+  }
+}
