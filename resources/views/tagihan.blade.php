@@ -59,7 +59,19 @@
                                     <label for="namaInput">Nama</label>
                                 </div>
                                 <div class="form-floating mb-3">
-                                    <input type="text" class="form-control" id="blokInput" name="blok" placeholder="Masukan blok" required />
+                                    <select class="form-control selectpicker" id="blokInput" name="blok" data-live-search="true" required>
+                                        <option value="" disabled selected>Pilih Blok</option>
+                                        <option value="Daytona">Daytona</option>
+                                        <option value="Estoril">Estoril</option>
+                                        <option value="Imola">Imola</option>
+                                        <option value="Indiana Polis">Indiana Polis</option>
+                                        <option value="Interlagos">Interlagos</option>
+                                        <option value="Laguna Seca">Laguna Seca</option>
+                                        <option value="Le Mans">Le Mans</option>
+                                        <option value="Monaco">Monaco</option>
+                                        <option value="Monza">Monza</option>
+                                        <option value="Silverstone">Silverstone</option>
+                                    </select>
                                     <label for="blokInput">Blok</label>
                                 </div>
                                 <div class="form-floating mb-3">
@@ -75,7 +87,7 @@
                                 <div class="mb-3">
                                     <label class="form-label" for="meterAwalInput">Meter Awal</label>
                                     <div class="input-group">
-                                        <input type="number" class="form-control" id="meterAwalInput" name="meter_awal" placeholder="Masukan meter awal" aria-label="Meter Awal" required />
+                                        <input type="number" class="form-control" id="meterAwalInput" name="meter_awal" placeholder="Masukan meter awal" aria-label="Meter Awal" readonly required />
                                         <span class="input-group-text">M<sup>3</sup></span>
                                     </div>
                                 </div>
@@ -129,17 +141,36 @@
                         'Authorization': 'Bearer ' + localStorage.getItem('token')
                     },
                     success: function(response) {
-                        console.log('Fetched user data:', response); // Log the fetched user data
                         $('#namaInput').val(response.nama);
-                        $('#userIdInput').val(response.user_id); // Set user_id
+                        $('#userIdInput').val(response.user_id); 
+                        fetchMeterAwal(response.user_id); 
                     },
                     error: function(xhr, status, error) {
                         $('#namaInput').val('');
-                        $('#userIdInput').val(''); // Clear user_id
+                        $('#userIdInput').val(''); 
+                        $('#meterAwalInput').val(''); 
                         console.error('Failed to fetch name:', error);
                     }
                 });
             }
+        }
+
+        function fetchMeterAwal(user_id) {
+            $.ajax({
+                url: '/api/admin/get-meter-awal',
+                type: 'POST',
+                data: { user_id: user_id },
+                headers: {
+                    'Authorization': 'Bearer ' + localStorage.getItem('token')
+                },
+                success: function(response) {
+                    $('#meterAwalInput').val(response.meter_awal); 
+                },
+                error: function(xhr, status, error) {
+                    $('#meterAwalInput').val(''); 
+                    console.error('Failed to fetch meter awal:', error);
+                }
+            });
         }
 
         $('#noHomeInput, #blokInput').on('blur', fetchName);
@@ -161,8 +192,6 @@
                 tunggakan_3: 0,
             };
 
-            console.log('Data to be submitted:', data); // Log data before submitting
-
             $.ajax({
                 url: '/api/admin/bills/add',
                 type: 'POST',
@@ -180,6 +209,9 @@
                 }
             });
         });
+
+        // Inisialisasi Bootstrap Select
+        $('.selectpicker').selectpicker();
     });
 </script>
 @endsection

@@ -40,7 +40,6 @@ class BillController extends Controller
 
     public function addBill(Request $request)
     {
-
         $data = $request->validate([
             'user_id' => 'required|exists:users,id',
             'paid' => 'required|boolean',
@@ -72,9 +71,43 @@ class BillController extends Controller
             $bill->update(array_merge($data, $billData));
             return response()->json($bill, 200);
         } else {
-
             $bill = Bill::create(array_merge($data, $billData));
             return response()->json($bill, 201);
         }
     }
+
+    public function getBillDetails($id)
+    {
+        $bill = Bill::with('user')->find($id);
+
+        if (!$bill) {
+            return response()->json(['error' => 'Bill not found'], 404);
+        }
+
+        return response()->json($bill, 200);
+    }
+
+    public function getMeterAwal(Request $request)
+    {
+        $request->validate([
+            'user_id' => 'required|exists:users,id',
+        ]);
+
+        try {
+            $bill = Bill::where('user_id', $request->user_id)
+                        ->orderBy('created_at', 'desc')
+                        ->first();
+
+            if ($bill) {
+                return response()->json(['meter_awal' => $bill->meter_akhir], 200); 
+            } else {
+                return response()->json(['meter_awal' => 0], 200); 
+            }
+        } catch (\Exception $e) {
+            Log::error('Error fetching meter awal: '.$e->getMessage());
+            return response()->json(['message' => 'Internal Server Error'], 500);
+        }
+    }
+
 }
+

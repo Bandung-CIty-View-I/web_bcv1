@@ -24,6 +24,7 @@ Route::middleware(['auth:sanctum'])->group(function () {
     Route::post('/admin/user/update', [ProfileController::class, 'updateProfile']);
     Route::post('/admin/daftarwarga', [UserController::class, 'registerWarga']);
     Route::post('/admin/find-name', [UserController::class, 'findName']);
+    Route::post('/admin/get-meter-awal', [BillController::class, 'getMeterAwal']);
     
     Route::get('/schedule', [JadwalSampahController::class, 'getSchedule']);
     Route::post('/bills', [BillController::class, 'getBills']);

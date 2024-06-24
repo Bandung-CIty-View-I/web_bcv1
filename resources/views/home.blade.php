@@ -8,7 +8,6 @@
                     <h2 style="font-size: 7vh">{{ $name }}</h2>
                     <br>
                     <h5>Perumahan Bandung City View I</h5>
-                    <div class="empty-column"></div>
                 </div>
             </div>
         </div>

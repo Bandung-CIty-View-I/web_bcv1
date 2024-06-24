@@ -49,10 +49,6 @@
                                         <label for="nama" class="form-label">Nama</label>
                                         <input type="text" class="form-control input-custom" id="nama" placeholder="Masukkan nama warga" required>
                                     </div>
-                                    {{-- <div class="mb-3">
-                                        <label for="noRumah" class="form-label">No. Rumah</label>
-                                        <input type="text" class="form-control input-custom" id="noRumah" placeholder="Masukkan No. Rumah" required>
-                                    </div> --}}
                                     <div class="mb-3">
                                         <label for="blok" class="form-label">Blok</label>
                                         <select class="form-select input-custom" id="blok" required>
@@ -107,7 +103,6 @@
 
     <script>
         $(document).ready(function() {
-            // Fetch user profile data
             $.ajax({
                 url: '/api/user/profile',
                 type: 'POST',
