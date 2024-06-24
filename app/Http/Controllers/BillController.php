@@ -76,17 +76,6 @@ class BillController extends Controller
         }
     }
 
-    public function getBillDetails($id)
-    {
-        $bill = Bill::with('user')->find($id);
-
-        if (!$bill) {
-            return response()->json(['error' => 'Bill not found'], 404);
-        }
-
-        return response()->json($bill, 200);
-    }
-
     public function getMeterAwal(Request $request)
     {
         $request->validate([
