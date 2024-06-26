@@ -55,7 +55,7 @@
                                 </div>
                             </div>
                             <div class="col d-flex flex-column" style="margin-left : 70px">
-                                <div class="mt-3" style="color : #33FF00;">
+                                <div class="mt-3" style="font-weight: bold">
                                     <p>Ubah Data Pribadi</p>
                                     <hr style="border-top: 2px solid black; margin-bottom : 0px; margin-top: 0px">
                                 </div>
@@ -80,7 +80,7 @@
                                     </div>
                                 </div>
                                 <div class="col d-flex flex-column">
-                                    <div class="mt-3" style="color : #33FF00;">
+                                    <div class="mt-3" style="font-weight: bold">
                                         <p>Ubah Detail Profile</p>
                                         <hr style="border-top: 2px solid black; margin-bottom : 0px; margin-top: 0px">
                                         <button class="btn btn-primary mt-3" id="edit-profile-btn">Edit Profile</button>
@@ -141,7 +141,7 @@
                                                         };
 
                                                         $.ajax({
-                                                            url: '/api/warga/user/update',
+                                                            url: '/api/user/update',
                                                             type: 'POST',
                                                             headers: {
                                                                 'Authorization': 'Bearer ' + localStorage.getItem('token')

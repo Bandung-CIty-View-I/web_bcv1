@@ -22,6 +22,7 @@
             <label for="password">Password</label>
           </div>
           <button class="btn w-100 py-2" style="background: #FE8660; color: white" type="submit">Sign In</button>
+          <button class="btn w-100 py-2 mt-2" style="background: #808080; color: white" onclick="window.location.href='/'">Back to Homepage</button>
           <div id="error-message" class="mt-3 text-danger"></div>
         </form>
       </div>

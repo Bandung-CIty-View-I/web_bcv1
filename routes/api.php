@@ -21,7 +21,6 @@ Route::middleware(['auth:sanctum'])->group(function () {
     Route::post('/admin/schedule/edit', [JadwalSampahController::class, 'editSchedule']);
     Route::post('/admin/bills/add', [BillController::class, 'addBill']);
     Route::post('/admin/bills/update', [BillController::class, 'updateBill']);
-    Route::post('/admin/user/update', [ProfileController::class, 'updateProfile']);
     Route::post('/admin/daftarwarga', [UserController::class, 'registerWarga']);
     Route::post('/admin/find-name', [UserController::class, 'findName']);
     Route::post('/admin/get-meter-awal', [BillController::class, 'getMeterAwal']);
@@ -29,5 +28,7 @@ Route::middleware(['auth:sanctum'])->group(function () {
     Route::get('/schedule', [JadwalSampahController::class, 'getSchedule']);
     Route::post('/bills', [BillController::class, 'getBills']);
     Route::post('/dashboard/data', [JadwalSampahController::class, 'getDashboardData']);
+    Route::get('/bills/{id}', [BillController::class, 'getBillDetails']);
     Route::post('/user/profile', [ProfileController::class, 'getProfile']);
+    Route::post('/user/update', [ProfileController::class, 'updateProfile']);
 });

@@ -119,7 +119,6 @@
                     }
                 });
 
-
                 $.ajax({
                     url: '/api/bills',
                     type: 'POST',

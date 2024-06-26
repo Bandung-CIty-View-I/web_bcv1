@@ -26,7 +26,6 @@
                         <a href="#" class="btn btn-primary">Hubungi</a>
                     </div>
                     <div class="card-body">
-
                         <h5 class="card-title">Anti</h5>
                         <p class="card-text">+62 812 3451 7935</p>
                         <a href="#" class="btn btn-primary">Hubungi</a>

@@ -11,14 +11,6 @@ Route::get('/', function () {
     ]);
 });
 
-Route::get('/about', function () {
-    return view('about', [
-        "title" => "About",
-        "name" => "Muhammad Fharist",
-        "email"=> "muhammadfharist1203@gmail.com",
-        "image" => "Bluerose.jpg" 
-    ]);
-});
 
 Route::get('/lokasi', function () {
     return view('lokasi', [

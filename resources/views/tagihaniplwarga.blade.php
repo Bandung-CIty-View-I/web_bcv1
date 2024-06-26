@@ -50,6 +50,12 @@
                                     <span>Export</span>
                                 </div>
                             </button>
+                            <button id="caraBayarBtn" class="btn btn-light border">
+                                <div class="d-flex">
+                                    <i class="bi bi-wallet me-2"></i>
+                                    <span>Cara Bayar</span>
+                                </div>
+                            </button>
                         </div>
                     </nav>
 
@@ -77,10 +83,30 @@
         </div>
     </div>
 
+    <!-- Modal Cara Bayar -->
+    <div class="modal fade" id="caraBayarModal" tabindex="-1" aria-labelledby="caraBayarModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="caraBayarModalLabel">Cara Bayar</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <p>Total Tagihan Bulan Ini: <span id="totalTagihan"></span></p>
+                    <p>ID Pelanggan Online: <span id="idPelangganOnline"></span></p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <script src="{{ asset('js/bootstrap.bundle.min.js') }}"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.17.0/xlsx.full.min.js"></script>
     <script>
         $(document).ready(function() {
+            // Fetch user profile
             $.ajax({
                 url: '/api/user/profile',
                 type: 'POST',
@@ -147,6 +173,35 @@
                 ws['!autofilter'] = { ref: XLSX.utils.encode_range(range) };
 
                 XLSX.writeFile(wb, "Tagihan_IPL.xlsx");
+            });
+
+            $('#caraBayarBtn').on('click', function() {
+                // Fetch total tagihan bulan ini and ID pelanggan online
+                $.ajax({
+                    url: '/api/bills',
+                    type: 'POST',
+                    headers: {
+                        'Authorization': 'Bearer ' + localStorage.getItem('token')
+                    },
+                    success: function(response) {
+                        if (response.length > 0) {
+                            var totalTagihan = response[0].total_tag;
+                            var idPelangganOnline = response[0].user.id_pelanggan_online;
+                            $('#totalTagihan').text('Rp' + totalTagihan.toLocaleString('id-ID'));
+                            $('#idPelangganOnline').text(idPelangganOnline);
+                        } else {
+                            $('#totalTagihan').text('Rp0');
+                            $('#idPelangganOnline').text('N/A');
+                        }
+                        $('#caraBayarModal').modal('show');
+                    },
+                    error: function(xhr, status, error) {
+                        console.error('Failed to fetch bill data:', error);
+                        $('#totalTagihan').text('Rp0');
+                        $('#idPelangganOnline').text('N/A');
+                        $('#caraBayarModal').modal('show');
+                    }
+                });
             });
 
         });

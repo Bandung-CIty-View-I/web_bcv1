@@ -51,7 +51,7 @@
                         <div class="col-md-6">
                             <div class="text-center">
                                 <div class="interactive-circle" id="reservoir-atas">
-                                    <img id="gambar-reservoir-atas" src="{{ asset('img/water-pump-off.png') }}" class="img-fluid" style="width: 100px; height: 100px;">
+                                    <img id="gambar-reservoir-atas" src="{{ asset('img/cylinder-off.png') }}" class="img-fluid" style="width: 100px; height: 100px;">
                                     <h5 class="mt-2">Reservoir Atas</h5>
                                 </div>
                             </div>
@@ -59,7 +59,7 @@
                         <div class="col-md-6">
                             <div class="text-center">
                                 <div class="interactive-circle" id="reservoir-bawah">
-                                    <img id="gambar-reservoir-bawah" src="{{ asset('img/water-pump-off.png') }}" class="img-fluid" style="width: 100px; height: 100px;">
+                                    <img id="gambar-reservoir-bawah" src="{{ asset('img/cylinder-off.png') }}" class="img-fluid" style="width: 100px; height: 100px;">
                                     <h5 class="mt-2">Reservoir Bawah</h5>
                                 </div>
                             </div>
@@ -187,12 +187,12 @@
             listenFirebase('ControlSystem/Automation', updateUIForAutomation);
             listenFirebase('ControlSystem/Reservoir1/Radar', (data) => {
                 const img = document.getElementById('gambar-reservoir-atas');
-                const newImage = data === 1 ? '{{ asset('img/water-pump.png') }}' : '{{ asset('img/water-pump-off.png') }}';
+                const newImage = data === 1 ? '{{ asset('img/cylinder.png') }}' : '{{ asset('img/cylinder-off.png') }}';
                 img.src = newImage;
             });
             listenFirebase('ControlSystem/Reservoir2/RadarPompa3', (data) => {
                 const img = document.getElementById('gambar-reservoir-bawah');
-                const newImage = data === 1 ? '{{ asset('img/water-pump.png') }}' : '{{ asset('img/water-pump-off.png') }}';
+                const newImage = data === 1 ? '{{ asset('img/cylinder.png') }}' : '{{ asset('img/cylinder-off.png') }}';
                 img.src = newImage;
             });
 

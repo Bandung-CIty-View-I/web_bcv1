@@ -22,7 +22,7 @@
     </div>
     <div class="row">
         <div class="col-md-3">
-            <div class="p-3 mb-2" style="background-color: #394E69; border-radius: 10px">
+            <div class="p-3 mb-2" style="background-color: #253793; border-radius: 10px">
                 <div class="d-flex align-items-center">
                     <img src="{{ asset('img/Profile.png') }}" class="img-fluid mr-2" style="max-height : 100px; border-radius: 40px; padding : 10px">
                     <h5 class="mb-0 text-white" id="nama-user-sidebar"></h5>
@@ -40,16 +40,15 @@
         <div class="col-md-9">
             <div class="card">
                 <div class="card-body" style="background-color: #394E69; border-radius: 5px">
-                    <div class="card-body col-md-6 mx-3 mb-4" style="background-color: #D9D9D9; border-radius: 15px">
+                    <div class="card-body  mx-3 mb-4" style="background-color: #D9D9D9; border-radius: 15px">
                         <h5 class="card-title" style="text-align: center">Selamat Datang, <span id="nama-user"></span></h5>
                     </div>
-                    <div class="col-md-6 mx-3 mb-4">
+                    <div class="mx-3 mb-4">
                         <div class="card-body" style="background-color: #D9D9D9; border-radius: 15px; position: relative;">
                             <div class="d-flex align-items-center">
                                 <div style="margin-right: 30px;">
-                                    <img src="{{ asset('img/Vector.png') }}" class="img-fluid" style="max-height: 100px; border-radius: 40px; padding: 5px">
+                                    <img src="{{ asset('img/trash.png') }}" class="img-fluid" style="max-height: 100px; border-radius: 40px; padding: 5px">
                                 </div>
-                                <div style="position: absolute; top: 0; bottom: 0; left: 100px; width: 10px; background-color: #848484;"></div>
                                 <div style="padding-right: 10px;">
                                     <h5 class="card-title">Jadwal ambil sampah</h5>
                                     <div id="schedule-list"></div>
@@ -61,9 +60,8 @@
                         <div class="card-body" style="background-color: #D9D9D9; border-radius: 15px; position: relative;">
                             <div class="d-flex align-items-center">
                                 <div style="margin-right: 30px;">
-                                    <img src="{{ asset('img/Vector.png') }}" class="img-fluid" style="max-height: 100px; border-radius: 40px; padding: 5px">
+                                    <img src="{{ asset('img/receipt.png') }}" class="img-fluid" style="max-height: 100px; border-radius: 40px; padding: 5px">
                                 </div>
-                                <div style="position: absolute; top: 0; bottom: 0; left: 100px; width: 10px; background-color: #848484;"></div>
                                 <div style="padding-right: 10px;">
                                     <h5 class="card-title">IPL Bulan Ini</h5>
                                     <p class="card-text" id="meter-awal">Meter Awal: </p>
