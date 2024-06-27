@@ -132,4 +132,27 @@ class BillController extends Controller
             return response()->json(['message' => 'Internal Server Error'], 500);
         }
     }
+
+    public function getBillByMonth(Request $request)
+    {
+        $request->validate([
+            'thn_bl' => 'required|string|size:6',
+        ]);
+
+        try {
+            $user = Auth::user();
+            $bill = Bill::where('user_id', $user->id)
+                        ->where('thn_bl', $request->thn_bl)
+                        ->first();
+
+            if ($bill) {
+                return response()->json($bill, 200);
+            } else {
+                return response()->json(['message' => 'Tagihan tidak ditemukan untuk bulan tersebut'], 404);
+            }
+        } catch (\Exception $e) {
+            Log::error('Error fetching bill by month: '.$e->getMessage());
+            return response()->json(['message' => 'Internal Server Error'], 500);
+        }
+    }
 }

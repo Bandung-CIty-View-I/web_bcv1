@@ -27,6 +27,7 @@ Route::middleware(['auth:sanctum'])->group(function () {
     
     Route::get('/schedule', [JadwalSampahController::class, 'getSchedule']);
     Route::post('/bills', [BillController::class, 'getBills']);
+    Route::post('/bills/by-month', [BillController::class, 'getBillByMonth']);
     Route::post('/dashboard/data', [JadwalSampahController::class, 'getDashboardData']);
     Route::get('/bills/{id}', [BillController::class, 'getBillDetails']);
     Route::post('/user/profile', [ProfileController::class, 'getProfile']);
