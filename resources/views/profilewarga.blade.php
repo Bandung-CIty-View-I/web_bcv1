@@ -40,7 +40,7 @@
         
         <div class="col-md-9">
             <div class="card">
-                <div class="card-body" style="background-color: #394E69; border-radius: 5px; color:white;">
+                <div class="card-body" style="background-color: #253793; border-radius: 5px; color:white;">
                     Personal Data
                     <hr style="border-top: 2px solid #000000; margin-top: 20px; margin-bottom: 20px;">
                 

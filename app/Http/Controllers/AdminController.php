@@ -104,7 +104,6 @@ class AdminController extends Controller
             'blok_cluster' => 'required|string|max:255',
             'no_hp' => 'required|string|max:255',
             'id_pelanggan_online' => 'required|string|max:255|unique:users',
-            'nomor_rumah' => 'required|string|max:255',
         ]);
 
         $user = new User();
@@ -115,7 +114,6 @@ class AdminController extends Controller
         $user->blok_cluster = $validatedData['blok_cluster'];
         $user->no_hp = $validatedData['no_hp'];
         $user->id_pelanggan_online = $validatedData['id_pelanggan_online'];
-        $user->nomor_rumah = $validatedData['nomor_rumah'];
         $user->save();
 
         return response()->json($user, 201);
@@ -138,7 +136,6 @@ class AdminController extends Controller
         $user = Auth::user();
         return response()->json([
             'nama' => $user->nama,
-            'nomor_rumah' => $user->nomor_rumah,
             'tanggal' => now()->format('l, d F Y'),
         ], 200);
     }

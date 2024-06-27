@@ -12,7 +12,6 @@ class CreateUsersTable extends Migration
             $table->id();
             $table->string('nama');
             $table->string('email')->unique();
-            // $table->string('nomor_rumah');
             $table->string('blok_cluster');
             $table->string('nomor_kavling');
             $table->string('no_hp');

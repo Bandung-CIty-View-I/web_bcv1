@@ -32,9 +32,7 @@
             <div class="col-md-9">
                 <div class="mt-4">
                     <h1 class="fs-4">Selamat Datang, <span id="nama-user"></span></h1>
-                    <h2 class="small text-muted fs-6">
-                       *Hari, Tanggal Bulan Tahun
-                    </h2>
+                    <h2 class="small text-muted fs-6" id="current-date"></h2>
 
                     <nav class="main-nav d-flex justify-content-between mt-5">
                         <div class="d-flex gap-4">
@@ -94,6 +92,9 @@
                 <div class="modal-body">
                     <p>Total Tagihan Bulan Ini: <span id="totalTagihan"></span></p>
                     <p>ID Pelanggan Online: <span id="idPelangganOnline"></span></p>
+                    <p>Untuk pembayaran iuran IPL dan air dapat dilakukan melalui virtual account dengan kode (59044).</p>
+                    <p>Atau melalui transfer ke BCA nomor 1377775678 a.n. CV. Bandung City View.</p>
+                    <p>Bukti transfer dapat dikirim melalui nomor HP/WA: 082320462406</p>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
@@ -116,6 +117,7 @@
                 success: function(response) {
                     $('#nama-user-sidebar').text(response.nama);
                     $('#nama-user').text(response.nama);
+                    $('#current-date').text(response.tanggal);
                 },
                 error: function(xhr, status, error) {
                     console.error('Failed to fetch profile data:', error);

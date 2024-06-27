@@ -25,7 +25,7 @@
             <div class="p-3 mb-2" style="background-color: #253793; border-radius: 10px">
                 <div class="d-flex align-items-center">
                     <img src="{{ asset('img/Profile.png') }}" class="img-fluid mr-2" style="max-height: 100px; border-radius: 40px; padding: 10px">
-                    <h5 class="mb-0 text-white" id="nama-user">Nomor Rumah</h5>
+                    <h5 class="mb-0 text-white" id="nama-user-sidebar"></h5>
                 </div>
                 <hr style="border-top: 2px solid #000000;">
                 <div class="p-2 mb-2">
@@ -110,6 +110,9 @@
                     <div class="modal-body">
                         <p>Total Tagihan Bulan Ini: <span id="totalTagihan"></span></p>
                         <p>ID Pelanggan Online: <span id="idPelangganOnline"></span></p>
+                        <p>Untuk pembayaran iuran IPL dan air dapat dilakukan melalui virtual account dengan kode (59044).</p>
+                        <p>Atau melalui transfer ke BCA nomor 1377775678 a.n. CV. Bandung City View.</p>
+                        <p>Bukti transfer dapat dikirim melalui nomor HP/WA: 082320462406</p>
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>

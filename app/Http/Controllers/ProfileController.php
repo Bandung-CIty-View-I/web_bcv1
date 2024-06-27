@@ -10,6 +10,7 @@ class ProfileController extends Controller
     public function getProfile(Request $request)
     {
         $user = Auth::user();
+        $user->tanggal = now()->format('l, d F Y');
         return response()->json($user, 200);
     }
 
@@ -22,7 +23,6 @@ class ProfileController extends Controller
             'nomor_kavling' => 'sometimes|required|string|max:255',
             'blok_cluster' => 'sometimes|required|string|max:255',
             'no_hp' => 'sometimes|required|string|max:255',
-            // 'nomor_rumah' => 'sometimes|required|string|max:255',
         ]);
 
         $user->update($validatedData);
