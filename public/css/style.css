@@ -2,8 +2,15 @@
   --bs-body-bg: #f8f2f0;
 }
 
+body {
+  background-attachment: fixed;
+  margin: 0;
+  padding: 0;
+  font-family: 'Arial', sans-serif;
+}
+
 .navbar {
-  background-color: #394e69;
+  background-color: #253793;
   color: #fafafa;
 }
 
@@ -66,7 +73,7 @@
 }
 
 .sidebar-card.card {
-  background-color: #394e69;
+  background-color: #253793;
 }
 
 .sidebar-card img {
@@ -141,25 +148,31 @@
   display: inline-block;
   cursor: pointer;
   border-radius: 50%;
-  padding: 10px; 
-  background-color: #ffffff; 
+  padding: 10px;
+  background-color: #ffffff;
 }
 
-/* Styles for home.blade.php */
 .content {
   margin-top: 18vh;
   color: azure;
 }
 
-@media (max-width: 992px) {
-  body {
-    background: #F8F2F0 !important; 
-  }
-  .image-container {
-    display: none; 
-  }
+.cards-row {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  padding: 20px;
+  background: rgba(255, 255, 255, 0.8);
+  box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.1);
+  border-radius: 10px 10px 0 0;
 }
 
+@media (max-width: 992px) {
+  .cards-row {
+    position: static;
+    margin-top: 20px;
+  }
+}
 
 @media (max-width: 768px) {
   .content {
@@ -167,15 +180,19 @@
     text-align: center;
     padding: 0 20px;
   }
-  .content h2 {
+  .content h1 {
     font-size: 5vh;
   }
+  .cards-row {
+    background: rgba(255, 255, 255, 0.8);
+  }
 }
+
 .input-custom {
-  background-color: rgba(255, 255, 255, 0); 
-  border: 1px solid black; 
+  background-color: rgba(255, 255, 255, 0);
+  border: 1px solid black;
   color: #fff;
-  width: 100%; 
+  width: 100%;
   max-width: 400px;
   padding: 0.5rem 1rem;
   transition: background-color 0.3s ease, border-color 0.3s ease;
@@ -192,28 +209,142 @@
 }
 
 .input-custom option {
-  background-color: rgba(0, 0, 0, 0.8); /* Background option */
-  color: #fff; /* Warna teks */
+  background-color: rgba(0, 0, 0, 0.8);
+  color: #fff;
 }
 
+.text-white {
+  color: white;
+}
+
+.display-1 {
+  font-size: 4rem;
+}
 .btn-custom {
-  background-color: #28a745;
+  background: #FE8660;
+  color: white;
   border: none;
-}
-
-.input-custom:focus {
-  background-color: rgba(255, 255, 255, 0.2);
-  border-color: rgba(255, 255, 255, 0.7);
-  outline: none;
+  transition: background-color 0.3s ease, color 0.3s ease;
 }
 
 .btn-custom:hover {
-  background-color: #218838;
+  background: #F05030;
+  color: white;
 }
-
 
 @media (max-width: 768px) {
   .input-custom {
-      max-width: 100%; 
+    max-width: 100%;
   }
 }
+
+.text-white {
+  color: white;
+}
+
+.display-1 {
+  font-size: 4rem;
+}
+
+
+.card-body {
+  padding: 1em;
+}
+
+.carousel-inner .card {
+  height: 100%;
+}
+
+@media (max-width: 768px) {
+  .carousel-item {
+      text-align: center;
+  }
+
+  .carousel-inner .card {
+      margin: 0 auto;
+      width: 80%;
+  }
+
+  .btn-custom {
+    width: 100%;
+    margin-bottom: 20px;
+  }
+}
+
+.sidebar-card {
+  background-color: #253793;
+  border-radius: 10px;
+  color: white;
+  padding: 1rem;
+}
+
+.profile-img {
+  max-height: 100px;
+  border-radius: 50%;
+  padding: 10px;
+}
+
+.main-card {
+  border: none;
+}
+
+.main-card-body {
+  background-color: #394E69;
+  border-radius: 10px;
+  padding: 2rem;
+}
+
+.greeting-card {
+  background-color: #D9D9D9;
+  border-radius: 15px;
+  text-align: center;
+}
+
+.info-card {
+  background-color: #D9D9D9;
+  border-radius: 15px;
+  padding: 1rem;
+  margin-bottom: 1rem;
+}
+
+.info-img {
+  max-height: 100px;
+  border-radius: 50%;
+  margin-right: 20px;
+}
+
+.info-divider {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 80px;
+  width: 5px;
+  background-color: #848484;
+  border-radius: 2px;
+  margin-right: 20px;
+}
+
+#schedule-list {
+  list-style-type: decimal;
+}
+
+@media (max-width: 768px) {
+  .sidebar-card, .main-card-body {
+      text-align: center;
+  }
+
+  .info-divider {
+      display: none;
+  }
+
+  .info-card .d-flex {
+      flex-direction: column;
+      align-items: center;
+  }
+}
+
+.mt-3 {
+  margin-top: 1rem;
+}
+
+
