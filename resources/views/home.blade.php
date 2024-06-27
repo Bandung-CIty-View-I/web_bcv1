@@ -1,5 +1,5 @@
 @extends('layouts.main')
-<body style="background: linear-gradient(to bottom right, #394E69 45%, #F4D772); margin: 0; padding: 0;">
+<body style="background: linear-gradient(to bottom right, #253793 45%, #F4D772); margin: 0; padding: 0;">
 @section('container')
 <div class="container">
     <div class="row align-items-center" style="min-height: 60vh;">

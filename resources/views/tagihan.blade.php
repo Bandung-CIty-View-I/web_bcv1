@@ -17,7 +17,7 @@
                         </ol>
                     </nav>
                 </div>
-            </div>
+            </div>  
         </div>
     </div>
     <div class="row">
@@ -47,11 +47,14 @@
                     Masukan Tagihan IPL
                 </div>
                 <div class="card-body">
-                    <form id="bill-form" action="/api/bills/add" method="POST">
+                    <form id="bill-form" action="/api/admin/bills/add" method="POST">
                         @csrf
                         <input type="hidden" id="userIdInput" name="user_id" value="{{ auth()->user()->id }}" />
                         <input type="hidden" id="iplInput" name="ipl" value="50000" />
                         <input type="hidden" id="paidInput" name="paid" value="0" />
+                        <input type="hidden" id="tunggakan1Input" name="tunggakan_1" />
+                        <input type="hidden" id="tunggakan2Input" name="tunggakan_2" />
+                        <input type="hidden" id="tunggakan3Input" name="tunggakan_3" />
                         <div class="row">
                             <div class="col-md-6">
                                 <div class="form-floating mb-3">
@@ -70,7 +73,9 @@
                                         <option value="Le Mans">Le Mans</option>
                                         <option value="Monaco">Monaco</option>
                                         <option value="Monza">Monza</option>
+                                        <option value="Monza">Monza</option>
                                         <option value="Silverstone">Silverstone</option>
+                                        <option value="C">C</option>
                                     </select>
                                     <label for="blokInput">Blok</label>
                                 </div>
@@ -104,6 +109,7 @@
                             <button type="submit" class="btn btn-success btn-outline">Submit</button>
                         </div>
                     </form>
+                    
                 </div>
             </div>
         </div>

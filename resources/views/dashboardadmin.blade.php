@@ -13,7 +13,7 @@
                 </nav>
             </div>
 
-            <div class="p-3 mb-2" style="background-color: #394E69; border-radius: 10px">
+            <div class="p-3 mb-2" style="background-color: #253793; border-radius: 10px">
                 <div class="d-flex align-items-center">
                     <img src="{{ asset('img/Profile.png') }}" class="img-fluid mr-2" style="max-height: 100px; border-radius: 40px; padding: 10px">
                     <h5 class="mb-0 text-white" id="nama-user-sidebar"></h5>
@@ -34,115 +34,202 @@
 
         <div class="col-md-9">
             <div class="card">
-                <div class="card-body" style="background-color: #394E69; border-radius: 5px">
-                    <div class="card-body col-md-6 mx-3 mb-4" style="background-color: #D9D9D9; border-radius: 15px">
+                <div class="card-body" style="background-color: #253793; border-radius: 5px">
+                    <div class="card-body mx-3 mb-4" style="background-color: #D9D9D9; border-radius: 15px">
                         <h5 class="card-title" style="text-align: center">Selamat Datang, <span id="nama-user"></span></h5>
                     </div>
-                    <div class="col-md-6 mx-3 mb-4">
+                    <div class="mx-3 mb-4">
                         <div class="card-body" style="background-color: #D9D9D9; border-radius: 15px; position: relative;">
                             <div class="d-flex align-items-center">
                                 <div style="margin-right: 30px;">
-                                    <img src="{{ asset('img/Vector.png') }}" class="img-fluid" style="max-height: 100px; border-radius: 40px; padding: 5px">
+                                    <img src="{{ asset('img/trash.png') }}" class="img-fluid" style="max-height: 100px; border-radius: 40px; padding: 5px">
                                 </div>
-                                <div style="position: absolute; top: 0; bottom: 0; left: 100px; width: 10px; background-color: #848484;"></div>
                                 <div style="padding-right: 10px;">
                                     <h5 class="card-title">Jadwal ambil sampah</h5>
-                                    <div id="schedule-list"></div>
+                                    <table class="table table-striped">
+                                        <tbody id="schedule-list">
+                                            <tr>
+                                                <td>Waktu</td>
+                                                <td id="senin-waktu"></td>
+                                                <td id="selasa-waktu"></td>
+                                                <td id="rabu-waktu"></td>
+                                                <td id="kamis-waktu"></td>
+                                                <td id="jumat-waktu"></td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
                                 </div>
                             </div>
                         </div>
                     </div>
-                    <div class="col-md-6 mx-3 mb-4">
+                    <div class="mx-3 mb-4">
                         <div class="card-body" style="background-color: #D9D9D9; border-radius: 15px; position: relative;">
-                            <div class="d-flex align-items-center">
-                                <div style="margin-right: 30px;">
-                                    <img src="{{ asset('img/Vector.png') }}" class="img-fluid" style="max-height: 100px; border-radius: 40px; padding: 5px">
+                            <div class="row">
+                                <div class="col-md-6 d-flex align-items-center">
+                                    <div style="margin-right: 30px;">
+                                        <img id="gambar-reservoir-atas" src="{{ asset('img/cylinder-off.png') }}" class="img-fluid" style="max-height: 100px; border-radius: 40px; padding: 5px">
+                                    </div>
+                                    <div style="padding-right: 10px;">
+                                        <h5 class="card-title">Reservoir Atas</h5>
+                                    </div>
                                 </div>
-                                <div style="position: absolute; top: 0; bottom: 0; left: 100px; width: 10px; background-color: #848484;"></div>
-                                <div style="padding-right: 10px;">
-                                    <h5 class="card-title">IPL Bulan Ini</h5>
-                                    <p class="card-text" id="meter-awal">Meter Awal: </p>
-                                    <p class="card-text" id="meter-akhir">Meter Akhir: </p>
-                                    <p class="card-text" id="meter-tagihan">Meter Tagihan bulan ini: </p>
+                                <div class="col-md-6 d-flex align-items-center">
+                                    <div style="margin-right: 30px;">
+                                        <img id="gambar-sumbersible-besar" src="{{ asset('img/lightbulb-off.png') }}" class="img-fluid" style="max-height: 100px; border-radius: 40px; padding: 5px">
+                                    </div>
+                                    <div style="padding-right: 10px;">
+                                        <h5 class="card-title">Submersible Besar</h5>
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                    <div class="flex-col col-md-6 mx-3 mb-4 align-self-end">
-                        <div class="card-body" style="background-color: #D9D9D9; border-radius: 15px"></div>
+                    <div class="mx-3 mb-4">
+                        <div class="card-body" style="background-color: #D9D9D9; border-radius: 15px; position: relative;">
+                            <div class="row">
+                                <div class="col-md-6 d-flex align-items-center">
+                                    <div style="margin-right: 30px;">
+                                        <img id="gambar-reservoir-bawah" src="{{ asset('img/cylinder-off.png') }}" class="img-fluid" style="max-height: 100px; border-radius: 40px; padding: 5px">
+                                    </div>
+                                    <div style="padding-right: 10px;">
+                                        <h5 class="card-title">Reservoir Bawah</h5>
+                                    </div>
+                                </div>
+                                <div class="col-md-6 d-flex align-items-center">
+                                    <div style="margin-right: 30px;">
+                                        <img id="gambar-sumbersible-kecil" src="{{ asset('img/lightbulb-off.png') }}" class="img-fluid" style="max-height: 100px; border-radius: 40px; padding: 5px">
+                                    </div>
+                                    <div style="padding-right: 10px;">
+                                        <h5 class="card-title">Submersible Kecil</h5>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
-        <script>
-            $(document).ready(function() {
-                function formatRupiah(angka) {
-                    return 'Rp' + angka.toLocaleString('id-ID');
-                }
-                $.ajax({
-                    url: '/api/user/profile',
-                    type: 'POST',
-                    headers: {
-                        'Authorization': 'Bearer ' + localStorage.getItem('token')
-                    },
-                    success: function(response) {
-                        $('#nama-user').text(response.nama);
-                        $('#nama-user-sidebar').text(response.nama);
-                    },
-                    error: function(xhr, status, error) {
-                        console.error('Failed to fetch profile data:', error);
-                    }
-                });
-
-  
-                $.ajax({
-                    url: '/api/schedule',
-                    type: 'GET',
-                    headers: {
-                        'Authorization': 'Bearer ' + localStorage.getItem('token')
-                    },
-                    success: function(response) {
-                        var scheduleList = $('#schedule-list');
-                        scheduleList.empty();
-
-                        if (response.length > 0) {
-                            response.forEach(function(schedule) {
-                                var scheduleItem = `<p>Hari: ${schedule.hari}, Waktu: ${schedule.waktu}</p>`;
-                                scheduleList.append(scheduleItem);
-                            });
-                        } else {
-                            scheduleList.append('<p>No schedule available.</p>');
-                        }
-                    },
-                    error: function(xhr, status, error) {
-                        console.error('Failed to fetch schedules:', error);
-                    }
-                });
-
-                $.ajax({
-                    url: '/api/bills',
-                    type: 'POST',
-                    headers: {
-                        'Authorization': 'Bearer ' + localStorage.getItem('token')
-                    },
-                    success: function(response) {
-                        if (response.length > 0) {
-                            var bill = response[0]; 
-                            $('#meter-awal').append(bill.meter_awal + ' m³');
-                            $('#meter-akhir').append(bill.meter_akhir + ' m³');
-                            $('#meter-tagihan').append(formatRupiah(bill.tag_now));
-                        } else {
-                            $('#meter-awal').text('No Data');
-                            $('#meter-akhir').text('No Data');
-                            $('#meter-tagihan').text('No Data');
-                        }
-                    },
-                    error: function(xhr, status, error) {
-                        console.error('Failed to fetch bill data:', error);
-                    }
-                });
-            });
-        </script>
     </div>
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/9.0.0/firebase-app.js";
+        import { getDatabase, ref, set, onValue } from "https://www.gstatic.com/firebasejs/9.0.0/firebase-database.js";
+
+        const firebaseConfig = {
+                apiKey: "AIzaSyBrFK8HL0bBK7QaVm5dsQJ9Gk9Nm5-LmlU",
+                authDomain: "bcv1-f450b.firebaseapp.com",
+                databaseURL: "https://bcv1-f450b-default-rtdb.asia-southeast1.firebasedatabase.app",
+                projectId: "bcv1-f450b",
+                storageBucket: "bcv1-f450b",
+                messagingSenderId: "632085793199",
+                appId: "1:632085793199:web:64563abd2d0d8faad2c75a",
+            };
+
+        const app = initializeApp(firebaseConfig);
+        const database = getDatabase(app);
+
+        function updateImageBasedOnFirebaseValue(elementId, imageId, value) {
+            const img = document.getElementById(imageId);
+            const onImage = '{{ asset('img/lightbulb-on.png') }}';
+            const offImage = '{{ asset('img/lightbulb-off.png') }}';
+            img.src = value === 1 ? onImage : offImage;
+        }
+
+        function updateCylinderImageBasedOnFirebaseValue(imageId, value) {
+            const img = document.getElementById(imageId);
+            const onImage = '{{ asset('img/cylinder.png') }}';
+            const offImage = '{{ asset('img/cylinder-off.png') }}';
+            img.src = value === 1 ? onImage : offImage;
+        }
+
+        function listenFirebase(path, callback) {
+            const dbRef = ref(database, path);
+            onValue(dbRef, (snapshot) => {
+                const data = snapshot.val();
+                callback(data);
+            });
+        }
+
+        listenFirebase('ControlSystem/Reservoir1/Radar', (data) => {
+            updateCylinderImageBasedOnFirebaseValue('gambar-reservoir-atas', data);
+        });
+
+        listenFirebase('ControlSystem/Reservoir2/RadarPompa3', (data) => {
+            updateCylinderImageBasedOnFirebaseValue('gambar-reservoir-bawah', data);
+        });
+
+        listenFirebase('ControlSystem/Reservoir2/Relay1', (data) => {
+            updateImageBasedOnFirebaseValue('sumbersible-besar', 'gambar-sumbersible-besar', data);
+        });
+
+        listenFirebase('ControlSystem/Reservoir2/Relay2', (data) => {
+            updateImageBasedOnFirebaseValue('sumbersible-kecil', 'gambar-sumbersible-kecil', data);
+        });
+
+        $(document).ready(function() {
+            function formatRupiah(angka) {
+                return 'Rp' + angka.toLocaleString('id-ID');
+            }
+            $.ajax({
+                url: '/api/user/profile',
+                type: 'POST',
+                headers: {
+                    'Authorization': 'Bearer ' + localStorage.getItem('token')
+                },
+                success: function(response) {
+                    $('#nama-user').text(response.nama);
+                    $('#nama-user-sidebar').text(response.nama);
+                },
+                error: function(xhr, status, error) {
+                    console.error('Failed to fetch profile data:', error);
+                }
+            });
+
+            // Fetch all schedules
+            $.ajax({
+                url: '/api/schedule',
+                type: 'GET',
+                headers: {
+                    'Authorization': 'Bearer ' + localStorage.getItem('token')
+                },
+                success: function(response) {
+                    var scheduleList = $('#schedule-list');
+                    scheduleList.empty();
+
+                    if (response.length > 0) {
+                        // Initialize empty arrays for days and times
+                        let days = ["Hari"];
+                        let times = ["Waktu"];
+
+                        response.forEach(function(schedule) {
+                            days.push(schedule.hari);
+                            times.push(schedule.waktu);
+                        });
+
+                        // Create rows for days and times
+                        let daysRow = "<tr>";
+                        days.forEach(function(day) {
+                            daysRow += "<td>" + day + "</td>";
+                        });
+                        daysRow += "</tr>";
+
+                        let timesRow = "<tr>";
+                        times.forEach(function(time) {
+                            timesRow += "<td>" + time + "</td>";
+                        });
+                        timesRow += "</tr>";
+
+                        // Append the rows to the schedule list
+                        scheduleList.append(daysRow);
+                        scheduleList.append(timesRow);
+                    } else {
+                        scheduleList.append('<tr><td colspan="3">No schedule available.</td></tr>');
+                    }
+                },
+                error: function(xhr, status, error) {
+                    console.error('Failed to fetch schedules:', error);
+                }
+            });
+        });
+    </script>
 </div>
 @endsection

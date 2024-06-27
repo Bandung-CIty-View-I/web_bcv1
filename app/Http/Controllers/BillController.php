@@ -51,8 +51,43 @@ class BillController extends Controller
             'tunggakan_2' => 'integer|nullable',
             'tunggakan_3' => 'integer|nullable',
         ]);
-
+        
+        if ($data['meter_akhir'] < $data['meter_awal']) {
+            return response()->json(['message' => 'Pastikan besaran meter akhir! Meter akhir tidak dapat kurang dari meter awal!'], 400);
+        }
+        
         $user = User::find($data['user_id']);
+
+        $previousBill = Bill::where('user_id', $data['user_id'])
+                            ->orderBy('created_at', 'desc')
+                            ->first();
+
+                            if ($previousBill) {
+                                $totalTagihanBulanLalu = $previousBill->tag_now;
+                                $tunggakan_1 = $previousBill->tunggakan_1;
+                                $tunggakan_2 = $previousBill->tunggakan_2;
+                                $tunggakan_3 = $previousBill->tunggakan_3;
+                                $lastMonthPaid = $previousBill->paid; 
+                            
+                                if ($lastMonthPaid == 0) {
+                                    if ($tunggakan_1 != null) {
+                                        if ($tunggakan_2 != null) {
+                                            $data['tunggakan_3'] = $tunggakan_3 + $tunggakan_2;
+                                            $data['tunggakan_2'] = $tunggakan_1;
+                                            $data['tunggakan_1'] = $totalTagihanBulanLalu;
+                                        } else {
+                                            $data['tunggakan_2'] = $tunggakan_1;
+                                            $data['tunggakan_1'] = $totalTagihanBulanLalu;
+                                        }
+                                    } else {
+                                        $data['tunggakan_1'] = $totalTagihanBulanLalu;
+                                    }
+                                } else {
+                                    $data['tunggakan_1'] = 0;
+                                    $data['tunggakan_2'] = 0;
+                                    $data['tunggakan_3'] = 0;
+                                }
+                            }                            
 
         $billData = Bill::calculateBill(
             $data['meter_awal'],
@@ -88,15 +123,13 @@ class BillController extends Controller
                         ->first();
 
             if ($bill) {
-                return response()->json($bill, 200); 
+                return response()->json(['meter_awal' => $bill->meter_akhir], 200); 
             } else {
-                return response()->json(['error' => 'Bill not found'], 404); 
+                return response()->json(['meter_awal' => 0], 200); 
             }
         } catch (\Exception $e) {
             Log::error('Error fetching meter awal: '.$e->getMessage());
             return response()->json(['message' => 'Internal Server Error'], 500);
         }
     }
-
 }
-

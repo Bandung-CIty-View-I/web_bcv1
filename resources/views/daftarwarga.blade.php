@@ -19,7 +19,7 @@
 
         <div class="row">
             <div class="col-md-3">
-                <div class="p-3 mb-2 sidebar-card card" style="background-color: #394E69; border-radius: 10px">
+                <div class="p-3 mb-2 sidebar-card card" style="background-color: #253793; border-radius: 10px">
                     <div class="d-flex align-items-center">
                         <img src="{{ asset('img/Profile.png') }}" class="img-fluid mr-2" style="max-height : 100px; border-radius: 40px; padding : 10px">
                         <h5 class="mb-0 text-white" id="nama-user"></h5>
@@ -40,7 +40,7 @@
 
             <div class="col-md-9">
                 <div class="card">
-                    <div class="card-body" style="background-color: #394E69; border-radius: 10px; color: white;">
+                    <div class="card-body" style="background-color: #253793; border-radius: 10px; color: white;">
                         <h3 class="text-center">Masukkan Data Warga</h3>
                         <form id="register-warga-form">
                             <div class="row">
