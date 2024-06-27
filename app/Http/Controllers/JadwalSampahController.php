@@ -14,29 +14,49 @@ class JadwalSampahController extends Controller
         return response()->json($schedule, 200);
     }
 
-    // public function editSchedule(Request $request)
-    // {
+    public function addSchedule(Request $request)
+    {
+        if (Auth::user()->role !== 'admin') {
+            return response()->json(['message' => 'Unauthorized'], 403);
+        }
 
-    //     if (Auth::user()->role !== 'admin') {
-    //         return response()->json(['message' => 'Unauthorized'], 403);
-    //     }
+        $validatedData = $request->validate([
+            'hari' => 'required|string',
+            'waktu' => 'required|string',
+        ]);
 
-    //     $validatedData = $request->validate([
-    //         'id' => 'required|integer',
-    //         'hari' => 'required|string',
-    //         'waktu' => 'required|string',
-    //     ]);
+        $schedule = new JadwalSampah();
+        $schedule->hari = $validatedData['hari'];
+        $schedule->waktu = $validatedData['waktu'];
+        $schedule->save();
 
-    //     $schedule = JadwalSampah::find($validatedData['id']);
-    //     if ($schedule) {
-    //         $schedule->hari = $validatedData['hari'];
-    //         $schedule->waktu = $validatedData['waktu'];
-    //         $schedule->save();
-    //         return response()->json(['message' => 'Schedule updated successfully'], 200);
-    //     } else {
-    //         return response()->json(['message' => 'Schedule not found'], 404);
-    //     }
-    // }
+        return response()->json(['message' => 'Schedule added successfully'], 201);
+    }
+
+    public function deleteScheduleByDay(Request $request)
+    {
+        if (Auth::user()->role !== 'admin') {
+            return response()->json(['message' => 'Unauthorized'], 403);
+        }
+
+        $validatedData = $request->validate([
+            'hari' => 'required|string',
+        ]);
+
+        $schedules = JadwalSampah::where('hari', $validatedData['hari'])->get();
+
+        if ($schedules->isEmpty()) {
+            return response()->json(['message' => 'No schedules found for the specified day'], 404);
+        }
+
+        foreach ($schedules as $schedule) {
+            $schedule->delete();
+        }
+
+        return response()->json(['message' => 'Schedules deleted successfully'], 200);
+    }
+
+
     public function getDashboardData()
     {
         $hariIni = now()->format('l');
