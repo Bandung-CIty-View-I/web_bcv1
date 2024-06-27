@@ -29,6 +29,11 @@ Route::middleware(['auth:sanctum'])->group(function () {
     Route::post('/schedule/add', [JadwalSampahController::class, 'addSchedule']);
     Route::delete('/schedule/day', [JadwalSampahController::class, 'deleteScheduleByDay']);
 
+    Route::get('/contacts', [KontakController::class, 'getContacts']);
+    Route::post('/contacts', [KontakController::class, 'addContact']);
+    Route::delete('/contacts/{id}', [KontakController::class, 'deleteContact']);
+    Route::put('/contacts/{id}', [KontakController::class, 'updateContact']);
+
     Route::post('/bills', [BillController::class, 'getBills']);
     Route::post('/bills/by-month', [BillController::class, 'getBillByMonth']);
     Route::post('/dashboard/data', [JadwalSampahController::class, 'getDashboardData']);
