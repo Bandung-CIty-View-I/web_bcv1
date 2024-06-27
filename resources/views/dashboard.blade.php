@@ -22,17 +22,19 @@
     </div>
     <div class="row">
         <div class="col-md-3">
-            <div class="p-3 mb-2 sidebar-card">
+            <div class="p-3 mb-2" style="background-color: #253793; border-radius: 10px">
                 <div class="d-flex align-items-center">
-                    <img src="{{ asset('img/Profile.png') }}" class="img-fluid profile-img" alt="User Profile">
-                    <h5 class="mb-0 text-white" id="nama-user-sidebar"></h5>
+                    <img src="{{ asset('img/Profile.png') }}" class="img-fluid mr-2" style="max-height: 100px; border-radius: 40px; padding: 10px">
+                    <h5 class="mb-0 text-white" id="nama-user">Nomor Rumah</h5>
                 </div>
-                <hr>
-                <nav class="nav flex-column">
-                    <a class="nav-link {{ ($title === "Dashboard") ? 'active' : ''}}" href="/dashboard">Dashboard</a>
-                    <a class="nav-link {{ ($title === "Tagihan IPL Warga") ? 'active' : ''}}" href="/detailtagihan">Detail Tagihan IPL</a>
-                    <a class="nav-link {{ ($title === "Profile Warga") ? 'active' : ''}}" href="/profilewarga">Profile</a>
-                </nav>
+                <hr style="border-top: 2px solid #000000;">
+                <div class="p-2 mb-2">
+                    <nav class="nav flex-column">
+                        <a class="nav-link {{ ($title === "Dashboard") ? 'active' : ''}}" href="/dashboard">Dashboard</a>
+                        <a class="nav-link" href="/detailtagihan">Detail Tagihan IPL</a>
+                        <a class="nav-link {{ ($title === "Profile Warga") ? 'active' : ''}}" href="/profilewarga">Profile</a>
+                    </nav>
+                </div>
             </div>
         </div>
         <div class="col-md-9">

@@ -13,7 +13,7 @@
                     </nav>
                 </div>
 
-                <div class="p-3 mb-2" style="background-color: #394E69; border-radius: 10px">
+                <div class="p-3 mb-2" style="background-color: #253793; border-radius: 10px">
                     <div class="d-flex align-items-center">
                         <img src="{{ asset('img/Profile.png') }}" class="img-fluid mr-2" style="max-height: 100px; border-radius: 40px; padding: 10px">
                         <h5 class="mb-0 text-white" id="nama-user-sidebar"></h5>
