@@ -2,6 +2,7 @@
   @php
     $exceptions1 = ["Dashboard", "Admin Dashboard", "Profile Warga", "Profile Admin", "Input Tagihan IPL", "Lihat Tagihan IPL", "Kondisi Air dan Alat", "Tagihan IPL Warga", "Daftar Akun Warga"];
     $loggedIn = Auth::check(); 
+    $userRole = Auth::check() ? Auth::user()->role : null; // Get user role if logged in
   @endphp
   <div class="container">
     <a class="navbar-brand" style="padding-right: 120px">BCV I</a>
@@ -20,7 +21,11 @@
         </li>
         @if($loggedIn)
           <li class="nav-item">
-            <a class="nav-link {{ ($title === "Kontak") ? 'active' : ''}}" href="/kontak" style="padding-right: 50px">Kontak</a>
+            @if($userRole === 'admin')
+              <a class="nav-link {{ ($title === "Kontak Admin") ? 'active' : ''}}" href="/kontakadmin" style="padding-right: 50px">Kontak</a>
+            @else
+              <a class="nav-link {{ ($title === "Kontak") ? 'active' : ''}}" href="/kontak" style="padding-right: 50px">Kontak</a>
+            @endif
           </li>
         @endif
       </ul>

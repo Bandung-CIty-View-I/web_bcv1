@@ -19,6 +19,13 @@ Route::get('/lokasi', function () {
     ]);
 });
 
+Route::get('/kontakadmin', function () {
+    return view('kontakadmin', [
+        "title" => "Kontak Admin",
+        "name" => "Kontak BCV I",
+    ]);
+});
+
 Route::get('/kontak', function () {
     return view('kontak', [
         "title" => "Kontak",
