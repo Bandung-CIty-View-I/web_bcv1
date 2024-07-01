@@ -82,8 +82,8 @@
                                 <div class="col d-flex flex-column">
                                     <div class="mt-3" style="font-weight: bold">
                                         <p>Ubah Detail Profile</p>
-                                        <hr style="border-top: 2px solid black; margin-bottom : 0px; margin-top: 0px">
-                                        <button class="btn btn-primary mt-3" id="edit-profile-btn">Edit Profile</button>
+                                        <hr style="border-top: 2px solid black; margin-bottom : 0px; margin-top: 0px;">
+                                        <button class="btn btn-secondary mt-3" id="edit-profile-btn" style="color: black">Edit Profile</button>
                                     </div>
                                             <script>
                                                 function togglePassword() {
