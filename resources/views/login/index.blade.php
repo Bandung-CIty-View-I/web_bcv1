@@ -1,7 +1,7 @@
 @extends('layouts.main')
 
 <link rel="stylesheet" href="/css/style.css">
-<body style="background: linear-gradient(to right, #F8F2F0 50%, #394E69 50%); margin:0; padding:0;">
+<body style="background: linear-gradient(to right, #F8F2F0 50%, #253793 50%); margin:0; padding:0;">
   @if (session('error'))
     <div class="alert alert-danger">
         {{ session('error') }}
@@ -26,7 +26,7 @@
           <div id="error-message" class="mt-3 text-danger"></div>
         </form>
       </div>
-      <div class="col-lg-6 d-none d-lg-flex align-items-center justify-content-center p-5" style="background-color: #394E69;">
+      <div class="col-lg-6 d-none d-lg-flex align-items-center justify-content-center p-5" style="background-color: #253793;">
         <img src="img/login.png" alt="Image" class="img-fluid">
       </div>
     </div>

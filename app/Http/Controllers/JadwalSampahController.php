@@ -19,18 +19,28 @@ class JadwalSampahController extends Controller
         if (Auth::user()->role !== 'admin') {
             return response()->json(['message' => 'Unauthorized'], 403);
         }
-
+    
         $validatedData = $request->validate([
             'hari' => 'required|string',
             'waktu' => 'required|string',
         ]);
-
-        $schedule = new JadwalSampah();
-        $schedule->hari = $validatedData['hari'];
-        $schedule->waktu = $validatedData['waktu'];
-        $schedule->save();
-
-        return response()->json(['message' => 'Schedule added successfully'], 201);
+    
+        // Check if schedule for the day already exists
+        $schedule = JadwalSampah::where('hari', $validatedData['hari'])->first();
+        
+        if ($schedule) {
+            // Update existing schedule
+            $schedule->waktu = $validatedData['waktu'];
+            $schedule->save();
+        } else {
+            // Create new schedule
+            $schedule = new JadwalSampah();
+            $schedule->hari = $validatedData['hari'];
+            $schedule->waktu = $validatedData['waktu'];
+            $schedule->save();
+        }
+    
+        return response()->json(['message' => 'Schedule added/updated successfully'], 201);
     }
 
     public function deleteScheduleByDay(Request $request)
@@ -38,23 +48,24 @@ class JadwalSampahController extends Controller
         if (Auth::user()->role !== 'admin') {
             return response()->json(['message' => 'Unauthorized'], 403);
         }
-
+    
         $validatedData = $request->validate([
             'hari' => 'required|string',
         ]);
-
+    
         $schedules = JadwalSampah::where('hari', $validatedData['hari'])->get();
-
+    
         if ($schedules->isEmpty()) {
             return response()->json(['message' => 'No schedules found for the specified day'], 404);
         }
-
+    
         foreach ($schedules as $schedule) {
             $schedule->delete();
         }
-
+    
         return response()->json(['message' => 'Schedules deleted successfully'], 200);
     }
+    
 
 
     public function getDashboardData()

@@ -33,20 +33,118 @@
         </div>
 
         <div class="col-md-9">
-            <div class="card">
-                <div class="card-body" style="background-color: #253793; border-radius: 5px">
-                    <div class="card-body mx-3 mb-4" style="background-color: #D9D9D9; border-radius: 15px">
-                        <h5 class="card-title" style="text-align: center">Selamat Datang, <span id="nama-user"></span></h5>
+            <div class="card main-card">
+                <div class="card-body main-card-body">
+                    <div class="card greeting-card mb-4">
+                        <div class="card-body">
+                            <h5 class="card-title text-center">Selamat Datang, <span id="nama-user"></span></h5>
+                        </div>
                     </div>
-                    <div class="mx-3 mb-4">
-                        <div class="card-body" style="background-color: #D9D9D9; border-radius: 15px; position: relative;">
-                            <div class="d-flex align-items-center">
-                                <div style="margin-right: 30px;">
-                                    <img src="{{ asset('img/trash.png') }}" class="img-fluid" style="max-height: 100px; border-radius: 40px; padding: 5px">
+                    <div class="row mx-3 mb-4">
+                        <div class="col-md-12">
+                            <div class="card-body" style="background-color: #D9D9D9; border-radius: 15px; position: relative;">
+                                <h5 class="card-title">Informasi Kondisi Alat</h5>
+                                <div class="row">
+                                    <div class="col-md-3 d-flex align-items-center">
+                                        <div style="margin-right: 10px;">
+                                            <img id="gambar-reservoir-atas" src="{{ asset('img/cylinder-off.png') }}" class="img-fluid" style="max-height: 60px; border-radius: 30px; padding: 5px">
+                                        </div>
+                                        <div style="padding-right: 5px;">
+                                            <h6 class="card-title">Reservoir Atas</h6>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-3 d-flex align-items-center">
+                                        <div style="margin-right: 10px;">
+                                            <img id="gambar-reservoir-bawah" src="{{ asset('img/cylinder-off.png') }}" class="img-fluid" style="max-height: 60px; border-radius: 30px; padding: 5px">
+                                        </div>
+                                        <div style="padding-right: 5px;">
+                                            <h6 class="card-title">Reservoir Bawah</h6>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-3 d-flex align-items-center">
+                                        <div style="margin-right: 10px;">
+                                            <img id="gambar2" src="{{ asset('img/lightbulb-off.png') }}" class="img-fluid" style="max-height: 60px; border-radius: 30px; padding: 5px">
+                                        </div>
+                                        <div style="padding-right: 5px;">
+                                            <h6 class="card-title">Summersible Besar</h6>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-3 d-flex align-items-center">
+                                        <div style="margin-right: 10px;">
+                                            <img id="gambar3" src="{{ asset('img/lightbulb-off.png') }}" class="img-fluid" style="max-height: 60px; border-radius: 30px; padding: 5px">
+                                        </div>
+                                        <div style="padding-right: 5px;">
+                                            <h6 class="card-title">Summersible Kecil</h6>
+                                        </div>
+                                    </div>
                                 </div>
-                                <div style="padding-right: 10px;">
-                                    <h5 class="card-title">Jadwal ambil sampah</h5>
-                                    <table class="table table-striped">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row mx-3 mb-4">
+                        <div class="col-md-6">
+                            <div class="card-body" style="background-color: #D9D9D9; border-radius: 15px; position: relative;">
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <h5 class="card-title">Edit Jadwal Ambil Sampah</h5>
+                                        <form id="edit-schedule-form">
+                                            <div class="form-group mb-3">
+                                                <label for="hari">Hari</label>
+                                                <select class="form-control" id="hari" name="hari">
+                                                    <option value="Senin">Senin</option>
+                                                    <option value="Selasa">Selasa</option>
+                                                    <option value="Rabu">Rabu</option>
+                                                    <option value="Kamis">Kamis</option>
+                                                    <option value="Jumat">Jumat</option>
+                                                    <option value="Sabtu">Sabtu</option>
+                                                    <option value="Minggu">Minggu</option>
+                                                </select>
+                                            </div>
+                                            <div class="form-group mb-3">
+                                                <label for="waktu">Waktu</label>
+                                                <input type="time" class="form-control" id="waktu" name="waktu">
+                                            </div>
+                                            <button type="submit" class="btn btn-primary">Simpan</button>
+                                        </form>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <h5 class="card-title">Hapus Jadwal Ambil Sampah</h5>
+                                        <form id="delete-schedule-form">
+                                            <div class="form-group mb-3">
+                                                <label for="delete-hari">Hari</label>
+                                                <select class="form-control" id="delete-hari" name="delete-hari">
+                                                    <option value="Senin">Senin</option>
+                                                    <option value="Selasa">Selasa</option>
+                                                    <option value="Rabu">Rabu</option>
+                                                    <option value="Kamis">Kamis</option>
+                                                    <option value="Jumat">Jumat</option>
+                                                    <option value="Sabtu">Sabtu</option>
+                                                    <option value="Minggu">Minggu</option>
+                                                </select>
+                                            </div>
+                                            <button type="submit" class="btn btn-danger">Hapus</button>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="card-body" style="background-color: #D9D9D9; border-radius: 15px; position: relative;">
+                                <h5 class="card-title">Jadwal Ambil Sampah</h5>
+                                <div style="overflow-x: auto;">
+                                    <table class="table table-striped table-bordered">
+                                        <thead>
+                                            <tr>
+                                                <th>Hari</th>
+                                                <th>Senin</th>
+                                                <th>Selasa</th>
+                                                <th>Rabu</th>
+                                                <th>Kamis</th>
+                                                <th>Jumat</th>
+                                                <th>Sabtu</th>
+                                                <th>Minggu</th>
+                                            </tr>
+                                        </thead>
                                         <tbody id="schedule-list">
                                             <tr>
                                                 <td>Waktu</td>
@@ -55,6 +153,8 @@
                                                 <td id="rabu-waktu"></td>
                                                 <td id="kamis-waktu"></td>
                                                 <td id="jumat-waktu"></td>
+                                                <td id="sabtu-waktu"></td>
+                                                <td id="minggu-waktu"></td>
                                             </tr>
                                         </tbody>
                                     </table>
@@ -62,113 +162,18 @@
                             </div>
                         </div>
                     </div>
-                    <div class="mx-3 mb-4">
-                        <div class="card-body" style="background-color: #D9D9D9; border-radius: 15px; position: relative;">
-                            <div class="row">
-                                <div class="col-md-6 d-flex align-items-center">
-                                    <div style="margin-right: 30px;">
-                                        <img id="gambar-reservoir-atas" src="{{ asset('img/cylinder-off.png') }}" class="img-fluid" style="max-height: 100px; border-radius: 40px; padding: 5px">
-                                    </div>
-                                    <div style="padding-right: 10px;">
-                                        <h5 class="card-title">Reservoir Atas</h5>
-                                    </div>
-                                </div>
-                                <div class="col-md-6 d-flex align-items-center">
-                                    <div style="margin-right: 30px;">
-                                        <img id="gambar-sumbersible-besar" src="{{ asset('img/lightbulb-off.png') }}" class="img-fluid" style="max-height: 100px; border-radius: 40px; padding: 5px">
-                                    </div>
-                                    <div style="padding-right: 10px;">
-                                        <h5 class="card-title">Submersible Besar</h5>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="mx-3 mb-4">
-                        <div class="card-body" style="background-color: #D9D9D9; border-radius: 15px; position: relative;">
-                            <div class="row">
-                                <div class="col-md-6 d-flex align-items-center">
-                                    <div style="margin-right: 30px;">
-                                        <img id="gambar-reservoir-bawah" src="{{ asset('img/cylinder-off.png') }}" class="img-fluid" style="max-height: 100px; border-radius: 40px; padding: 5px">
-                                    </div>
-                                    <div style="padding-right: 10px;">
-                                        <h5 class="card-title">Reservoir Bawah</h5>
-                                    </div>
-                                </div>
-                                <div class="col-md-6 d-flex align-items-center">
-                                    <div style="margin-right: 30px;">
-                                        <img id="gambar-sumbersible-kecil" src="{{ asset('img/lightbulb-off.png') }}" class="img-fluid" style="max-height: 100px; border-radius: 40px; padding: 5px">
-                                    </div>
-                                    <div style="padding-right: 10px;">
-                                        <h5 class="card-title">Submersible Kecil</h5>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
+    <script type="module" src="{{ asset('js/firebase-config.js') }}"></script>
     <script type="module">
-        import { initializeApp } from "https://www.gstatic.com/firebasejs/9.0.0/firebase-app.js";
-        import { getDatabase, ref, set, onValue } from "https://www.gstatic.com/firebasejs/9.0.0/firebase-database.js";
-
-        const firebaseConfig = {
-                apiKey: "AIzaSyBrFK8HL0bBK7QaVm5dsQJ9Gk9Nm5-LmlU",
-                authDomain: "bcv1-f450b.firebaseapp.com",
-                databaseURL: "https://bcv1-f450b-default-rtdb.asia-southeast1.firebasedatabase.app",
-                projectId: "bcv1-f450b",
-                storageBucket: "bcv1-f450b",
-                messagingSenderId: "632085793199",
-                appId: "1:632085793199:web:64563abd2d0d8faad2c75a",
-            };
-
-        const app = initializeApp(firebaseConfig);
-        const database = getDatabase(app);
-
-        function updateImageBasedOnFirebaseValue(elementId, imageId, value) {
-            const img = document.getElementById(imageId);
-            const onImage = '{{ asset('img/lightbulb-on.png') }}';
-            const offImage = '{{ asset('img/lightbulb-off.png') }}';
-            img.src = value === 1 ? onImage : offImage;
-        }
-
-        function updateCylinderImageBasedOnFirebaseValue(imageId, value) {
-            const img = document.getElementById(imageId);
-            const onImage = '{{ asset('img/cylinder.png') }}';
-            const offImage = '{{ asset('img/cylinder-off.png') }}';
-            img.src = value === 1 ? onImage : offImage;
-        }
-
-        function listenFirebase(path, callback) {
-            const dbRef = ref(database, path);
-            onValue(dbRef, (snapshot) => {
-                const data = snapshot.val();
-                callback(data);
-            });
-        }
-
-        listenFirebase('ControlSystem/Reservoir1/Radar', (data) => {
-            updateCylinderImageBasedOnFirebaseValue('gambar-reservoir-atas', data);
-        });
-
-        listenFirebase('ControlSystem/Reservoir2/RadarPompa3', (data) => {
-            updateCylinderImageBasedOnFirebaseValue('gambar-reservoir-bawah', data);
-        });
-
-        listenFirebase('ControlSystem/Reservoir2/Relay1', (data) => {
-            updateImageBasedOnFirebaseValue('sumbersible-besar', 'gambar-sumbersible-besar', data);
-        });
-
-        listenFirebase('ControlSystem/Reservoir2/Relay2', (data) => {
-            updateImageBasedOnFirebaseValue('sumbersible-kecil', 'gambar-sumbersible-kecil', data);
-        });
-
         $(document).ready(function() {
             function formatRupiah(angka) {
                 return 'Rp' + angka.toLocaleString('id-ID');
             }
+
             $.ajax({
                 url: '/api/user/profile',
                 type: 'POST',
@@ -192,42 +197,65 @@
                     'Authorization': 'Bearer ' + localStorage.getItem('token')
                 },
                 success: function(response) {
-                    var scheduleList = $('#schedule-list');
-                    scheduleList.empty();
-
-                    if (response.length > 0) {
-                        // Initialize empty arrays for days and times
-                        let days = ["Hari"];
-                        let times = ["Waktu"];
-
-                        response.forEach(function(schedule) {
-                            days.push(schedule.hari);
-                            times.push(schedule.waktu);
-                        });
-
-                        // Create rows for days and times
-                        let daysRow = "<tr>";
-                        days.forEach(function(day) {
-                            daysRow += "<td>" + day + "</td>";
-                        });
-                        daysRow += "</tr>";
-
-                        let timesRow = "<tr>";
-                        times.forEach(function(time) {
-                            timesRow += "<td>" + time + "</td>";
-                        });
-                        timesRow += "</tr>";
-
-                        // Append the rows to the schedule list
-                        scheduleList.append(daysRow);
-                        scheduleList.append(timesRow);
-                    } else {
-                        scheduleList.append('<tr><td colspan="3">No schedule available.</td></tr>');
-                    }
+                    response.forEach(function(schedule) {
+                        $('#' + schedule.hari.toLowerCase() + '-hari').text(schedule.hari);
+                        $('#' + schedule.hari.toLowerCase() + '-waktu').text(schedule.waktu);
+                    });
                 },
                 error: function(xhr, status, error) {
                     console.error('Failed to fetch schedules:', error);
                 }
+            });
+
+            $('#edit-schedule-form').on('submit', function(e) {
+                e.preventDefault();
+
+                var hari = $('#hari').val();
+                var waktu = $('#waktu').val();
+
+                $.ajax({
+                    url: '/api/schedule/add',
+                    type: 'POST',
+                    headers: {
+                        'Authorization': 'Bearer ' + localStorage.getItem('token')
+                    },
+                    data: {
+                        hari: hari,
+                        waktu: waktu
+                    },
+                    success: function(response) {
+                        $('#' + hari.toLowerCase() + '-hari').text(hari);
+                        $('#' + hari.toLowerCase() + '-waktu').text(waktu);
+                        $('#waktu').val('--:--');
+                    },
+                    error: function(xhr, status, error) {
+                        console.error('Failed to update schedule:', error);
+                    }
+                });
+            });
+
+            $('#delete-schedule-form').on('submit', function(e) {
+                e.preventDefault();
+
+                var hari = $('#delete-hari').val();
+
+                $.ajax({
+                    url: '/api/schedule/day',
+                    type: 'DELETE',
+                    headers: {
+                        'Authorization': 'Bearer ' + localStorage.getItem('token')
+                    },
+                    data: {
+                        hari: hari
+                    },
+                    success: function(response) {
+                        $('#' + hari.toLowerCase() + '-hari').text('');
+                        $('#' + hari.toLowerCase() + '-waktu').text('');
+                    },
+                    error: function(xhr, status, error) {
+                        console.error('Failed to delete schedule:', error);
+                    }
+                });
             });
         });
     </script>

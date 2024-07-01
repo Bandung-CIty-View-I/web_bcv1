@@ -47,25 +47,35 @@
                     </div>
                     <div class="row mx-3 mb-4">
                         <div class="col-md-6">
-                            <div class="card-body info-card" style="position: relative;">
-                                <div class="d-flex align-items-center">
-                                    <div style="margin-right: 30px;">
-                                        <img src="{{ asset('img/trash.png') }}" class="img-fluid" style="max-height: 100px; border-radius: 40px; padding: 5px">
-                                    </div>
-                                    <div style="padding-right: 10px;">
-                                        <h5 class="card-title">Jadwal ambil sampah</h5>
-                                        <table class="table table-striped">
-                                            <thead>
-                                                <tr>
-                                                    <th>No</th>
-                                                    <th>Hari</th>
-                                                    <th>Waktu</th>
-                                                </tr>
-                                            </thead>
-                                            <tbody id="schedule-list">
-                                            </tbody>
-                                        </table>
-                                    </div>
+                            <div class="card-body" style="background-color: #D9D9D9; border-radius: 15px; position: relative;">
+                                <h5 class="card-title">Jadwal Ambil Sampah</h5>
+                                <div style="overflow-x: auto;">
+                                    <table class="table table-striped table-bordered">
+                                        <thead>
+                                            <tr>
+                                                <th>Hari</th>
+                                                <th>Senin</th>
+                                                <th>Selasa</th>
+                                                <th>Rabu</th>
+                                                <th>Kamis</th>
+                                                <th>Jumat</th>
+                                                <th>Sabtu</th>
+                                                <th>Minggu</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody id="schedule-list">
+                                            <tr>
+                                                <td>Waktu</td>
+                                                <td id="senin-waktu"></td>
+                                                <td id="selasa-waktu"></td>
+                                                <td id="rabu-waktu"></td>
+                                                <td id="kamis-waktu"></td>
+                                                <td id="jumat-waktu"></td>
+                                                <td id="sabtu-waktu"></td>
+                                                <td id="minggu-waktu"></td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
                                 </div>
                             </div>
                         </div>
@@ -149,17 +159,10 @@
                     'Authorization': 'Bearer ' + localStorage.getItem('token')
                 },
                 success: function(response) {
-                    var scheduleList = $('#schedule-list');
-                    scheduleList.empty();
-
-                    if (response.length > 0) {
-                        response.forEach(function(schedule, index) {
-                            var scheduleItem = `<tr><td>${index + 1}</td><td>${schedule.hari}</td><td>${schedule.waktu}</td></tr>`;
-                            scheduleList.append(scheduleItem);
-                        });
-                    } else {
-                        scheduleList.append('<tr><td colspan="3">No schedule available.</td></tr>');
-                    }
+                    response.forEach(function(schedule) {
+                        $('#' + schedule.hari.toLowerCase() + '-hari').text(schedule.hari);
+                        $('#' + schedule.hari.toLowerCase() + '-waktu').text(schedule.waktu);
+                    });
                 },
                 error: function(xhr, status, error) {
                     console.error('Failed to fetch schedules:', error);
