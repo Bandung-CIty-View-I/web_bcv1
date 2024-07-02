@@ -81,14 +81,14 @@ listenFirebase('ControlSystem/Automation', updateUIForAutomation);
 listenFirebase('ControlSystem/Reservoir1/Radar', (data) => {
     const img = document.getElementById('gambar-reservoir-atas');
     if (img) {
-        const newImage = data === 1 ? 'img/cylinder.png' : 'img/cylinder-off.png'; 
+        const newImage = data === 1 ?  'img/cylinder-off.png' : 'img/cylinder.png';
         img.src = newImage;
     }
 });
 listenFirebase('ControlSystem/Reservoir2/RadarPompa3', (data) => {
     const img = document.getElementById('gambar-reservoir-bawah');
     if (img) {
-        const newImage = data === 1 ? 'img/cylinder.png' : 'img/cylinder-off.png'; 
+        const newImage = data === 1 ?  'img/cylinder-off.png' : 'img/cylinder.png';
         img.src = newImage;
     }
 });
