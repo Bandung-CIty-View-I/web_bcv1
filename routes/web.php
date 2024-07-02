@@ -11,6 +11,12 @@ Route::get('/', function () {
     ]);
 });
 
+Route::get('/about', function () {
+    return view('about', [
+        "title" => "Tentang BCV I",
+        "name" => "Deskripsi Bandung City View I"
+    ]);
+});
 
 Route::get('/lokasi', function () {
     return view('lokasi', [

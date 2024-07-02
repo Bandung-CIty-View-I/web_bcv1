@@ -2,7 +2,7 @@
   @php
     $exceptions1 = ["Dashboard", "Admin Dashboard", "Profile Warga", "Profile Admin", "Input Tagihan IPL", "Lihat Tagihan IPL", "Kondisi Air dan Alat", "Tagihan IPL Warga", "Daftar Akun Warga"];
     $loggedIn = Auth::check(); 
-    $userRole = Auth::check() ? Auth::user()->role : null; // Get user role if logged in
+    $userRole = Auth::check() ? Auth::user()->role : null; 
   @endphp
   <div class="container">
     <a class="navbar-brand" style="padding-right: 120px">BCV I</a>
@@ -52,12 +52,10 @@
 
 <script>
   document.getElementById('logout-form')?.addEventListener('submit', function(event) {
-    event.preventDefault(); // Prevent the form from submitting normally
+    event.preventDefault(); 
     
-    // Menghapus token dari localStorage
     localStorage.removeItem('token');
     
-    // Submit form
     this.submit();
   });
 </script>
