@@ -64,6 +64,9 @@
                                 <div class="form-floating mb-3">
                                     <select class="form-control selectpicker" id="blokInput" name="blok" data-live-search="true" required>
                                         <option value="" disabled selected>Pilih Blok</option>
+                                        <option value="A">C</option>
+                                        <option value="B">C</option>
+                                        <option value="C">C</option>
                                         <option value="Daytona">Daytona</option>
                                         <option value="Estoril">Estoril</option>
                                         <option value="Imola">Imola</option>
@@ -75,7 +78,6 @@
                                         <option value="Monza">Monza</option>
                                         <option value="Monza">Monza</option>
                                         <option value="Silverstone">Silverstone</option>
-                                        <option value="C">C</option>
                                     </select>
                                     <label for="blokInput">Blok</label>
                                 </div>
