@@ -79,5 +79,4 @@ class KontakController extends Controller
             return response()->json(['message' => 'Contact not found'], 404);
         }
     }
-
 }

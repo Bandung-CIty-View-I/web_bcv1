@@ -123,9 +123,9 @@ class BillController extends Controller
                         ->first();
 
             if ($bill) {
-                return response()->json(['meter_awal' => $bill->meter_akhir], 200); 
+                return response()->json($bill, 200); 
             } else {
-                return response()->json(['meter_awal' => 0], 200); 
+                return response()->json(['error' => 'Bill not found'], 404); 
             }
         } catch (\Exception $e) {
             Log::error('Error fetching meter awal: '.$e->getMessage());
