@@ -26,7 +26,7 @@
     </div>
     <div class="container p-3 mt-4" style="background-color: #253793; border-radius: 10px">
         <div class="img-container text-center mb-3">
-            <img src="{{ asset('img/bcv1.jpg') }}" class="img-fluid" alt="Bandung City View I">
+            <img src="{{ asset('img/about.jpg') }}" class="img-fluid" alt="Bandung City View I">
         </div>
         <p class="text-white">
             Bandung City View I adalah perumahan modern yang terletak di jantung kota Bandung. Dikelilingi oleh fasilitas lengkap dan lingkungan yang asri, perumahan ini menawarkan kenyamanan dan keamanan bagi penghuninya. Setiap unit dilengkapi dengan teknologi terbaru untuk mendukung gaya hidup modern.
