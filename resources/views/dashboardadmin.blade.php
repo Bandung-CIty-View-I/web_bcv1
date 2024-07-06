@@ -1,18 +1,23 @@
 @extends('layouts.main')
 
 @section('container')
-<div class="container-fluid mt-5">
+<div class="container-fluid">
+    <div class="container-fluid mt-5">
+        <div class="row">
+            <div class="col-md-3">
+                <div class="d-flex justify-content-center">
+                    <nav style="--bs-breadcrumb-divider: '>'" aria-current="page">
+                        <ol class="breadcrumb">
+                            <li class="breadcrumb-item">Home</li>
+                            <li class="breadcrumb-item active" aria-current="page">{{ $title }}</li>
+                        </ol>
+                    </nav>
+                </div>
+            </div>
+        </div>
+    </div>
     <div class="row">
         <div class="col-md-3">
-            <div class="d-flex justify-content-center">
-                <nav style="--bs-breadcrumb-divider: '>'" aria-current="page">
-                    <ol class="breadcrumb">
-                        <li class="breadcrumb-item">Home</li>
-                        <li class="breadcrumb-item active" aria-current="page">{{ $title }}</li>
-                    </ol>
-                </nav>
-            </div>
-
             <div class="p-3 mb-2" style="background-color: #253793; border-radius: 10px">
                 <div class="d-flex align-items-center">
                     <img src="{{ asset('img/Profile.png') }}" class="img-fluid mr-2" style="max-height: 100px; border-radius: 40px; padding: 10px">
@@ -31,7 +36,6 @@
                 </div>
             </div>
         </div>
-
         <div class="col-md-9">
             <div class="card main-card">
                 <div class="card-body main-card-body">
@@ -167,6 +171,7 @@
             </div>
         </div>
     </div>
+
     <script type="module" src="{{ asset('js/firebase-config.js') }}"></script>
     <script type="module">
         $(document).ready(function() {
