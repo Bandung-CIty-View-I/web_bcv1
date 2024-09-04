@@ -11,7 +11,7 @@ class UserSeeder extends Seeder
     public function run()
     {
         User::create([
-            'nama' => 'Admin User',
+            'nama' => 'Admin',
             'email' => 'admin@example.com',
             'blok_cluster' => 'A',
             'nomor_kavling' => 'A1',
@@ -22,7 +22,7 @@ class UserSeeder extends Seeder
         ]);
 
         User::create([
-            'nama' => 'Warga User',
+            'nama' => 'Warga',
             'email' => 'warga@example.com',
             'blok_cluster' => 'B',
             'nomor_kavling' => 'B2',
