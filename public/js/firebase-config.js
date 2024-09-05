@@ -32,13 +32,12 @@ window.handleClick = function(elementId, firebasePath, imageId, onImage, offImag
 
 function updateFirebase(path, value) {
     const dbRef = ref(database, path);
-    console.log(`Updating Firebase at ${path} with value ${value}`); 
     set(dbRef, value)
         .then(() => {
             console.log("Data updated successfully!");
         })
         .catch((error) => {
-            console.error("Error updating data: ", error);
+            console.error("Error updating data!");
         });
 }
 

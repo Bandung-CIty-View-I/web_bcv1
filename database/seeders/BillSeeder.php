@@ -10,7 +10,8 @@ class BillSeeder extends Seeder
 {
     public function run()
     {
-        $users = User::all();
+        // Ambil semua pengguna dengan role 'warga'
+        $users = User::where('role', 'warga')->get();
 
         foreach ($users as $user) {
             $meter_awal = rand(100, 500);

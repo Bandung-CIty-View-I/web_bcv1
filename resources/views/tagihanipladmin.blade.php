@@ -42,7 +42,7 @@
                         <button class="btn search-btn" type="button" id="buttonSearchTable">
                             <i class="bi bi-search"></i>
                         </button>
-                        <input type="text" class="form-control search-input" id="searchName" placeholder="Search ..." aria-label="Example text with button addon" aria-describedby="buttonSearchTable">
+                        <input type="text" class="form-control search-input" id="searchName" placeholder="Name search ..." aria-label="Example text with button addon" aria-describedby="buttonSearchTable">
                     </div>
                     <div class="d-flex gap-4">
                         <button class="btn btn-light border" data-bs-toggle="modal" data-bs-target="#filterModal">
@@ -119,6 +119,7 @@
                         </select>
                     </div>
                     <button type="button" class="btn btn-primary" id="applyFilterBtn">Apply Filter</button>
+                    <button type="button" class="btn btn-primary" id="removeFilterBtn">Remove Filter</button>
                 </form>
             </div>
         </div>
@@ -189,12 +190,30 @@ $(document).ready(function() {
 
     // Apply filter function
     function applyFilter() {
+        const year = $('#filterYear').val();
+        let month = $('#filterMonth').val();
+
+        // Validasi input tahun dan bulan
+        if (!year || !month) {
+            alert('Kamu harus memasukkan bulan beserta tahunnya!');
+            return;
+        }
+
+        // Pastikan bulan selalu memiliki dua digit
+        if (month.length === 1) {
+            month = '0' + month;
+        }
+
+        // Gabungkan menjadi format YYYYMM
+        const yearMonth = year + month;
+
         const filters = {
-            year: $('#filterYear').val(),
-            month: $('#filterMonth').val()
+            thn_bl: yearMonth
         };
+
         fetchBillData(filters);
         $('#filterModal').modal('hide');
+        $('.modal-backdrop').remove();   // Hapus elemen backdrop
     }
 
     // Apply filter on button click
@@ -202,11 +221,23 @@ $(document).ready(function() {
         applyFilter();
     });
 
+    
     // Apply filter on Enter key press
     $('#filterYear, #filterMonth').on('keypress', function(e) {
         if (e.which === 13) { // Enter key code is 13
             applyFilter();
         }
+    });
+
+    // Remove filter on button click
+    $('#removeFilterBtn').on('click', function() {
+        // Kosongkan nilai input tahun dan bulan
+        $('#filterYear').val('');
+        $('#filterMonth').val('');
+        const filters = {};
+        fetchBillData(filters);
+        $('#filterModal').modal('hide');
+        $('.modal-backdrop').remove(); 
     });
 
     // Handle Enter key for search
@@ -232,22 +263,39 @@ $(document).ready(function() {
     // Export to Excel
     $('#exportBtn').on('click', function() {
         var table = document.getElementById('billTable');
-        var wb = XLSX.utils.table_to_book(table, {sheet: "Tagihan IPL"});
-        var ws = wb.Sheets["Tagihan IPL"];
+        var wb = XLSX.utils.book_new(); // Buat workbook baru
+        var ws_data = [];
 
-        // Mengambil range dari sheet
-        var range = XLSX.utils.decode_range(ws['!ref']);
+        // Ekstraksi header dari tabel
+        var headers = [];
+        var headerCells = table.querySelectorAll("thead th");
+        headerCells.forEach(function(header) {
+            headers.push(header.innerText);
+        });
+        ws_data.push(headers); // Tambahkan header ke data worksheet
 
-        // Menambahkan style bold pada header
-        for(var C = range.s.c; C <= range.e.c; ++C) {
-            var cell_address = XLSX.utils.encode_cell({c:C, r:0});
-            if(!ws[cell_address]) continue;
-        }
+        // Ekstraksi data dari tabel
+        var rows = table.querySelectorAll("tbody tr");
+        rows.forEach(function(row) {
+            var rowData = [];
+            var cells = row.querySelectorAll("th, td");
+            cells.forEach(function(cell) {
+                rowData.push(cell.innerText);
+            });
+            ws_data.push(rowData);
+        });
+
+        // Lakukan sorting data berdasarkan kolom nomor kavling (index ke-3)
+        ws_data = [ws_data[0]].concat(ws_data.slice(1).sort((a, b) => a[3].localeCompare(b[3], 'id-ID', { numeric: true })));
+
+        // Tambahkan data yang telah disortir ke worksheet
+        var ws = XLSX.utils.aoa_to_sheet(ws_data);
 
         // Menambahkan format tabel
-        ws['!autofilter'] = { ref: XLSX.utils.encode_range(range) };
+        ws['!autofilter'] = { ref: XLSX.utils.encode_range({ s: { r: 0, c: 0 }, e: { r: ws_data.length - 1, c: headers.length - 1 } }) };
 
-        XLSX.writeFile(wb, "Tagihan_IPL.xlsx");
+        XLSX.utils.book_append_sheet(wb, ws, "Tagihan IPL");
+        XLSX.writeFile(wb, "Tagihan_IPLS.xlsx");
     });
 });
 

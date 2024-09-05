@@ -54,7 +54,7 @@
   document.getElementById('logout-form')?.addEventListener('submit', function(event) {
     event.preventDefault(); 
     
-    localStorage.removeItem('token');
+    localStorage.clear();
     
     this.submit();
   });

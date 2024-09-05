@@ -42,12 +42,6 @@
                                     <span>Filter</span>
                                 </div>
                             </button>
-                            <button id="exportBtn" class="btn btn-light border">
-                                <div class="d-flex">
-                                    <i class="bi bi-box-arrow-up me-2"></i>
-                                    <span>Export</span>
-                                </div>
-                            </button>
                             <button id="caraBayarBtn" class="btn btn-light border">
                                 <div class="d-flex">
                                     <i class="bi bi-wallet me-2"></i>
@@ -80,6 +74,47 @@
             </div>
         </div>
     </div>
+
+<!-- Modal for Filter -->
+<div class="modal fade" id="filterModal" tabindex="-1" aria-labelledby="filterModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="filterModalLabel">Filter Tagihan</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form id="filterForm">
+                    <div class="mb-3">
+                        <label for="filterYear" class="form-label">Tahun</label>
+                        <input type="number" class="form-control" id="filterYear" name="filterYear">
+                    </div>
+                    <div class="mb-3">
+                        <label for="filterMonth" class="form-label">Bulan</label>
+                        <select class="form-select" id="filterMonth" name="filterMonth">
+                            <option value="">Pilih Bulan</option>
+                            <option value="01">Januari</option>
+                            <option value="02">Februari</option>
+                            <option value="03">Maret</option>
+                            <option value="04">April</option>
+                            <option value="05">Mei</option>
+                            <option value="06">Juni</option>
+                            <option value="07">Juli</option>
+                            <option value="08">Agustus</option>
+                            <option value="09">September</option>
+                            <option value="10">Oktober</option>
+                            <option value="11">November</option>
+                            <option value="12">Desember</option>
+                        </select>
+                    </div>
+                    <button type="button" class="btn btn-primary" id="applyFilterBtn">Apply Filter</button>
+                    <button type="button" class="btn btn-primary" id="removeFilterBtn">Remove Filter</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
 
     <!-- Modal Cara Bayar -->
     <div class="modal fade" id="caraBayarModal" tabindex="-1" aria-labelledby="caraBayarModalLabel" aria-hidden="true">
@@ -124,57 +159,98 @@
             });
 
             // Fetch bill data
-            $.ajax({
-                url: '/api/bills',
-                type: 'POST',
-                headers: {
-                    'Authorization': 'Bearer ' + localStorage.getItem('token')
-                },
-                success: function(response) {
-                    var billTableBody = $('#bill-table-body');
-                    billTableBody.empty(); 
+            function fetchBillData(filters = {}) {
+                $.ajax({
+                    url: '/api/bills',
+                    type: 'POST',
+                    headers: {
+                        'Authorization': 'Bearer ' + localStorage.getItem('token')
+                    },
+                    data: filters,
+                    success: function(response) {
+                        var billTableBody = $('#bill-table-body');
+                        billTableBody.empty(); 
 
-                    if (response.length > 0) {
-                        response.forEach(function(bill) {
-                            var row = `
-                                <tr>
-                                    <th scope="row">${bill.thn_bl.substring(0, 4)}</th>
-                                    <td>${new Date(bill.thn_bl.substring(0, 4), bill.thn_bl.substring(4, 6) - 1).toLocaleString('default', { month: 'long' })}</td>
-                                    <td>${bill.meter_awal} M<sup>3</sup></td>
-                                    <td>${bill.meter_akhir} M<sup>3</sup></td>
-                                    <td>Rp${bill.total_tag.toLocaleString('id-ID')}</td>
-                                </tr>
-                            `;
-                            billTableBody.append(row);
-                        });
-                    } else {
-                        billTableBody.append('<tr><td colspan="5" class="text-center">No data available</td></tr>');
+                        if (response.length > 0) {
+                            response.forEach(function(bill) {
+                                var row = `
+                                    <tr>
+                                        <th scope="row">${bill.thn_bl.substring(0, 4)}</th>
+                                        <td>${new Date(bill.thn_bl.substring(0, 4), bill.thn_bl.substring(4, 6) - 1).toLocaleString('default', { month: 'long' })}</td>
+                                        <td>${bill.user.nama}</td>
+                                        <td>${bill.user.nomor_kavling}</td>
+                                        <td>${bill.meter_awal} M<sup>3</sup></td>
+                                        <td>${bill.meter_akhir} M<sup>3</sup></td>
+                                        <td>Rp${bill.total_tag.toLocaleString('id-ID')}</td>
+                                    </tr>
+                                `;
+                                billTableBody.append(row);
+                            });
+                        } else {
+                            billTableBody.append('<tr><td colspan="7" class="text-center">No data available</td></tr>');
+                        }
+                    },
+                    error: function(xhr, status, error) {
+                        console.error('Failed to fetch bill data:', error);
                     }
-                },
-                error: function(xhr, status, error) {
-                    console.error('Failed to fetch bill data:', error);
+                });
+            }
+
+            fetchBillData();
+
+            // Apply filter function
+            function applyFilter() {
+                const year = $('#filterYear').val();
+                let month = $('#filterMonth').val();
+
+                // Validasi input tahun dan bulan
+                if (!year || !month) {
+                    alert('Kamu harus memasukkan bulan beserta tahunnya!');
+                    return;
+                }
+
+                // Pastikan bulan selalu memiliki dua digit
+                if (month.length === 1) {
+                    month = '0' + month;
+                }
+
+                // Gabungkan menjadi format YYYYMM
+                const yearMonth = year + month;
+
+                const filters = {
+                    thn_bl: yearMonth
+                };
+
+                fetchBillData(filters);
+                $('#filterModal').modal('hide');
+                $('.modal-backdrop').remove();   // Hapus elemen backdrop
+            }
+
+            // Apply filter on button click
+            $('#applyFilterBtn').on('click', function() {
+                applyFilter();
+            });
+
+            
+            // Apply filter on Enter key press
+            $('#filterYear, #filterMonth').on('keypress', function(e) {
+                if (e.which === 13) { // Enter key code is 13
+                    applyFilter();
                 }
             });
 
-            $('#exportBtn').on('click', function() {
-                var table = document.getElementById('billTable');
-                var wb = XLSX.utils.table_to_book(table, {sheet: "Tagihan IPL"});
-                var ws = wb.Sheets["Tagihan IPL"];
+            // Remove filter on button click
+            $('#removeFilterBtn').on('click', function() {
+                // Kosongkan nilai input tahun dan bulan
+                $('#filterYear').val('');
+                $('#filterMonth').val('');
 
-                // Mengambil range dari sheet
-                var range = XLSX.utils.decode_range(ws['!ref']);
-
-                // Menambahkan style bold pada header
-                for(var C = range.s.c; C <= range.e.c; ++C) {
-                    var cell_address = XLSX.utils.encode_cell({c:C, r:0});
-                    if(!ws[cell_address]) continue;
-                }
-
-                // Menambahkan format tabel
-                ws['!autofilter'] = { ref: XLSX.utils.encode_range(range) };
-
-                XLSX.writeFile(wb, "Tagihan_IPL.xlsx");
+                const filters = {};
+                fetchBillData(filters);
+                $('#filterModal').modal('hide');
+                $('.modal-backdrop').remove(); 
             });
+
 
             $('#caraBayarBtn').on('click', function() {
                 // Fetch total tagihan bulan ini and ID pelanggan online
