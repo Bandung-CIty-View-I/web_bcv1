@@ -10,41 +10,6 @@ use Illuminate\Support\Facades\Log;
 
 class BillController extends Controller
 {
-    // public function getBills(Request $request)
-    // {
-    //     $user = Auth::user();
-
-    //     $query = Bill::with('user');
-
-    //     if ($user->role !== 'admin') {
-    //         $query->where('user_id', $user->id);
-    //     }
-
-    //     if ($request->has('thn_bl')) {
-    //         $query->where('thn_bl', $request->thn_bl);
-
-    //         // Jika bukan admin, hanya ambil satu record
-    //         if ($user->role !== 'admin') {
-    //             $bill = $query->first();
-    //             if ($bill) {
-    //                 return response()->json($bill, 200);
-    //             } else {
-    //                 return response()->json([], 200);
-    //             }
-    //         }
-    //     }
-
-    //     if ($request->has('name')) {
-    //         $query->whereHas('user', function($q) use ($request) {
-    //             $q->where('nama', 'like', '%' . $request->name . '%');
-    //         });
-    //     }
-
-    //     $bills = $query->get();
-
-    //     return response()->json($bills, 200);
-    // }
-
     public function getBills(Request $request)
     {
         $user = Auth::user();
@@ -102,12 +67,8 @@ class BillController extends Controller
             'user_id' => 'required|exists:users,id',
             'paid' => 'required|boolean',
             'thn_bl' => 'required|string|size:6',
-            'ipl' => 'required|integer',
             'meter_awal' => 'required|integer',
             'meter_akhir' => 'required|integer',
-            'tunggakan_1' => 'integer|nullable',
-            'tunggakan_2' => 'integer|nullable',
-            'tunggakan_3' => 'integer|nullable',
         ]);
         
         if ($data['meter_akhir'] < $data['meter_awal']) {
@@ -115,6 +76,8 @@ class BillController extends Controller
         }
         
         $user = User::find($data['user_id']);
+
+        $data['ipl'] = $user->ipl;
 
         $previousBill = Bill::where('user_id', $data['user_id'])
                             ->orderBy('created_at', 'desc')
@@ -151,9 +114,9 @@ class BillController extends Controller
             $data['meter_awal'],
             $data['meter_akhir'],
             $data['ipl'],
-            $data['tunggakan_1'] ?? 0,
-            $data['tunggakan_2'] ?? 0,
-            $data['tunggakan_3'] ?? 0
+            $data['tunggakan_1'],
+            $data['tunggakan_2'],
+            $data['tunggakan_3']
         );
 
         $bill = Bill::where('user_id', $data['user_id'])
@@ -169,7 +132,7 @@ class BillController extends Controller
         }
     }
 
-    public function getMeterAwal(Request $request)
+    public function getMeterAkhir(Request $request)
     {
         $request->validate([
             'user_id' => 'required|exists:users,id',

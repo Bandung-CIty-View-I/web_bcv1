@@ -15,6 +15,7 @@ class CreateUsersTable extends Migration
             $table->string('blok_cluster');
             $table->string('nomor_kavling');
             $table->string('no_hp');
+            $table->integer('ipl');
             $table->string('password');
             $table->string('role')->default('warga');
             $table->string('id_pelanggan_online')->unique(); 

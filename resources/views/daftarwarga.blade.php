@@ -67,7 +67,7 @@
                                     </div>
                                     <div class="mb-3">
                                         <label for="nomorKavling" class="form-label">Nomor Kavling</label>
-                                        <input type="text" class="form-control input-custom" id="nomorKavling" placeholder="Masukkan Nomor Kavling" required>
+                                        <input oninput="this.value = this.value.toUpperCase()" type="text" class="form-control input-custom" id="nomorKavling" placeholder="Masukkan Nomor Kavling" required>
                                     </div>
                                     <div class="mb-3">
                                         <label for="noHP" class="form-label">No. HP</label>

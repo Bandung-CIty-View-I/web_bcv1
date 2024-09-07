@@ -117,7 +117,6 @@
 
                                                             $('#edit-nama').val(response.nama);
                                                             $('#edit-no-kavling').val(response.nomor_kavling);
-                                                            $('#edit-blok').val(response.blok_cluster);
                                                             $('#edit-no-hp').val(response.no_hp);
                                                         },
                                                         error: function(xhr, status, error) {
@@ -136,7 +135,6 @@
                                                         const data = {
                                                             nama: $('#edit-nama').val(),
                                                             nomor_kavling: $('#edit-no-kavling').val(),
-                                                            blok_cluster: $('#edit-blok').val(),
                                                             no_hp: $('#edit-no-hp').val(),
                                                         };
 

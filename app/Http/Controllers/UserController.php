@@ -106,7 +106,7 @@ class UserController extends Controller
                         ->first();
     
             if ($user) {
-                return response()->json(['nama' => $user->nama, 'user_id' => $user->id], 200);
+                return response()->json(['nama' => $user->nama, 'user_id' => $user->id, 'ipl' => $user->ipl], 200);
             } else {
                 return response()->json(['message' => 'User not found'], 404);
             }

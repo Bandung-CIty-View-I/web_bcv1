@@ -34,10 +34,10 @@ function updateFirebase(path, value) {
     const dbRef = ref(database, path);
     set(dbRef, value)
         .then(() => {
-            console.log("Data updated successfully!");
+            // console.log("Data updated successfully!");
         })
         .catch((error) => {
-            console.error("Error updating data!");
+            // console.error("Error updating data!");
         });
 }
 

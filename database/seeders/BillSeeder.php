@@ -16,7 +16,7 @@ class BillSeeder extends Seeder
         foreach ($users as $user) {
             $meter_awal = rand(100, 500);
             $meter_akhir = rand(500, 1000);
-            $ipl = 50000;
+            $ipl = $user->ipl;
             $tunggakan_1 = 0;
             $tunggakan_2 = 0;
             $tunggakan_3 = 0;

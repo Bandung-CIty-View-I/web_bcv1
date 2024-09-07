@@ -43,30 +43,27 @@
 
         <div class="col-md-9">
             <div class="card card-tagihan-ipl">
-                <div class="card-title">
-                    Masukan Tagihan IPL
+                <div class="card-header text-center">
+                    <strong>Masukkan Tagihan IPL</strong>
                 </div>
                 <div class="card-body">
                     <form id="bill-form" action="/api/admin/bills/add" method="POST">
                         @csrf
                         <input type="hidden" id="userIdInput" name="user_id" value="{{ auth()->user()->id }}" />
-                        <input type="hidden" id="iplInput" name="ipl" value="50000" />
                         <input type="hidden" id="paidInput" name="paid" value="0" />
                         <input type="hidden" id="tunggakan1Input" name="tunggakan_1" />
                         <input type="hidden" id="tunggakan2Input" name="tunggakan_2" />
                         <input type="hidden" id="tunggakan3Input" name="tunggakan_3" />
                         <div class="row">
                             <div class="col-md-6">
-                                <div class="form-floating mb-3">
-                                    <input type="text" class="form-control" id="namaInput" name="nama" placeholder="Masukan nama" readonly required />
-                                    <label for="namaInput">Nama</label>
+                                <div class="mb-3">
+                                    <label class="form-label" for="namaInput">Nama</label>
+                                    <input type="text" class="form-control" id="namaInput" name="nama" placeholder="Nama akan keluar otomatis" readonly required />
                                 </div>
-                                <div class="form-floating mb-3">
+                                <div class="mb-3">
+                                    <label class="form-label" for="blokInput">Blok</label>
                                     <select class="form-control selectpicker" id="blokInput" name="blok" data-live-search="true" required>
                                         <option value="" disabled selected>Pilih Blok</option>
-                                        <option value="A">C</option>
-                                        <option value="B">C</option>
-                                        <option value="C">C</option>
                                         <option value="Daytona">Daytona</option>
                                         <option value="Estoril">Estoril</option>
                                         <option value="Imola">Imola</option>
@@ -76,36 +73,41 @@
                                         <option value="Le Mans">Le Mans</option>
                                         <option value="Monaco">Monaco</option>
                                         <option value="Monza">Monza</option>
-                                        <option value="Monza">Monza</option>
                                         <option value="Silverstone">Silverstone</option>
                                     </select>
-                                    <label for="blokInput">Blok</label>
                                 </div>
-                                <div class="form-floating mb-3">
-                                    <input type="text" class="form-control" id="noHomeInput" name="nomor_kavling" placeholder="Masukan nomor kavling" required />
-                                    <label for="noHomeInput">Nomor Kavling</label>
+                                <div class="mb-3">
+                                    <label class="form-label" for="noHomeInput">Nomor Kavling</label>
+                                    <input oninput="this.value = this.value.toUpperCase()" type="text" class="form-control" id="noHomeInput" name="nomor_kavling" placeholder="Masukan nomor kavling" required />
                                 </div>
                             </div>
                             <div class="col-md-6">
-                                <div class="mb-3">
+                                <!-- <div class="mb-3">
                                     <label for="tanggalInput" class="form-label">Tanggal</label>
                                     <input type="date" class="form-control form-date" id="tanggalInput" name="thn_bl" required />
-                                </div>
+                                </div> -->
                                 <div class="mb-3">
                                     <label class="form-label" for="meterAwalInput">Meter Awal</label>
                                     <div class="input-group">
-                                        <input type="number" class="form-control" id="meterAwalInput" name="meter_awal" placeholder="Masukan meter awal" aria-label="Meter Awal" readonly required />
+                                        <input type="number" class="form-control" id="meterAwalInput" name="meter_awal" placeholder="Masukan meter awal" readonly required />
                                         <span class="input-group-text">M<sup>3</sup></span>
                                     </div>
                                 </div>
                                 <div class="mb-3">
                                     <label class="form-label" for="meterAkhirInput">Meter Akhir</label>
                                     <div class="input-group">
-                                        <input type="number" class="form-control" id="meterAkhirInput" name="meter_akhir" placeholder="Masukan meter akhir" aria-label="Meter Akhir" required />
+                                        <input type="number" class="form-control" id="meterAkhirInput" name="meter_akhir" placeholder="Masukan meter akhir" required />
                                         <span class="input-group-text">M<sup>3</sup></span>
                                     </div>
                                 </div>
+                                <div class="mb-3">
+                                    <label class="form-label" for="iplInput">IPL</label>
+                                    <input type="number" class="form-control" id="iplInput" name="ipl" placeholder="IPL akan keluar otomatis" readonly required />
+                                </div>
                             </div>
+                        </div>
+                        <div class="mt-2 d-flex justify-content-center">
+                            <p>Tagihan ini akan diinputkan untuk bulan: <span id="monthName"></span></p>
                         </div>
                         <div class="mt-2 d-flex justify-content-center">
                             <button type="submit" class="btn btn-success btn-outline">Submit</button>
@@ -119,6 +121,25 @@
 </div>
 
 <script>
+    document.addEventListener("DOMContentLoaded", function() {
+        function generateMonth() {
+            const listMonthName = ["Januari", "Februari", "Maret", "April", "Mei", "Juni", "Juli", "Agustus", "September", "Oktober", "November", "Desember"];
+            const d = new Date();
+            
+            // Dapatkan nama bulan saat ini
+            const currentMonthName = listMonthName[d.getMonth()+1];
+
+            // Cetak ke konsol (untuk debugging)
+            console.log(currentMonthName);
+
+            // Tampilkan nama bulan di elemen HTML dengan id "monthName"
+            document.getElementById('monthName').textContent = currentMonthName;
+        }
+
+        // Panggil fungsi setelah konten dimuat
+        generateMonth();
+    });
+
     $(document).ready(function() {
         $.ajax({
             url: '/api/admin/data',
@@ -150,29 +171,48 @@
                     },
                     success: function(response) {
                         $('#namaInput').val(response.nama);
-                        $('#userIdInput').val(response.user_id); 
+                        $('#userIdInput').val(response.user_id);
+                        $('#iplInput').val(response.ipl);
                         fetchMeterAwal(response.user_id); 
                     },
                     error: function(xhr, status, error) {
                         $('#namaInput').val('');
                         $('#userIdInput').val(''); 
-                        $('#meterAwalInput').val(''); 
+                        $('#meterAwalInput').val('');
+                        $('#iplInput').val('');
                         console.error('Failed to fetch name:', error);
                     }
                 });
             }
         }
 
+        function generateMonthYear(){
+            const d = new Date();
+            let nextMonthFinal;
+            let year = d.getFullYear().toString();
+            let month = d.getMonth();
+            let nextMonthRealValue = (month+2).toString();
+            if (nextMonthRealValue.length == 1){
+                nextMonthFinal = '0' + nextMonthRealValue;
+            } else {
+                nextMonthFinal = nextMonthRealValue;
+            }
+            
+            let thn_bl = year+nextMonthFinal;
+            console.log(thn_bl);
+            return thn_bl;
+        }
+
         function fetchMeterAwal(user_id) {
             $.ajax({
-                url: '/api/admin/get-meter-awal',
+                url: '/api/admin/get-meter-akhir',
                 type: 'POST',
                 data: { user_id: user_id },
                 headers: {
                     'Authorization': 'Bearer ' + localStorage.getItem('token')
                 },
                 success: function(response) {
-                    $('#meterAwalInput').val(response.meter_awal); 
+                    $('#meterAwalInput').val(response.meter_akhir); 
                 },
                 error: function(xhr, status, error) {
                     $('#meterAwalInput').val(''); 
@@ -191,8 +231,7 @@
                 nomor_kavling: $('#noHomeInput').val(),
                 nama: $('#namaInput').val(),
                 paid: $('#paidInput').val(),
-                thn_bl: $('#tanggalInput').val().replace(/-/g, '').substring(0, 6),
-                ipl: $('#iplInput').val(),
+                thn_bl: generateMonthYear(),
                 meter_awal: $('#meterAwalInput').val(),
                 meter_akhir: $('#meterAkhirInput').val(),
                 tunggakan_1: 0,
