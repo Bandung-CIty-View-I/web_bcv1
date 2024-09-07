@@ -130,6 +130,11 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.17.0/xlsx.full.min.js"></script>
 <script>
 $(document).ready(function() {
+    $('#filterModal').on('hidden.bs.modal', function() {
+        $('body').css('overflow', '');
+        $('body').css('padding-right', '');
+    });
+    
     // Fetch admin data
     $.ajax({
         url: '/api/admin/data',
@@ -234,8 +239,7 @@ $(document).ready(function() {
         // Kosongkan nilai input tahun dan bulan
         $('#filterYear').val('');
         $('#filterMonth').val('');
-        const filters = {};
-        fetchBillData(filters);
+        fetchBillData({});
         $('#filterModal').modal('hide');
         $('.modal-backdrop').remove(); 
     });
