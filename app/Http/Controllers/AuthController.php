@@ -23,7 +23,15 @@ class AuthController extends Controller
 
     public function login(Request $request)
     {
-        $credentials = $request->only('email', 'password');
+        $request->validate([
+            'identifier' => 'required', // Bisa berupa email atau nomor telepon
+            'password' => 'required',
+        ]);
+
+        $credentials = [
+            filter_var($request->identifier, FILTER_VALIDATE_EMAIL) ? 'email' : 'no_hp' => $request->identifier,
+            'password' => $request->password,
+        ];
 
         if (Auth::attempt($credentials)) {
             $user = Auth::user();

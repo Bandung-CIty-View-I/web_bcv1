@@ -13,9 +13,16 @@
         <form class="form-signin w-100" id="user-login-form">
           <h1 class="h3 mt-3 text-center">Welcome!</h1>
           <p class="mt-3 text-center" style="color:#808080">Welcome back! Please enter your details</p>
+
+          <!-- Tombol Toggle Email / Phone Number -->
+          <div class="d-flex justify-content-center mb-3">
+            <button type="button" id="toggle-login" class="btn btn-outline-secondary">Use Phone Number</button>
+          </div>
+
           <div class="form-floating mb-3">
-            <input type="email" class="form-control" id="email" placeholder="name@example.com">
-            <label for="email">Enter your username</label>
+            <!-- Input Dinamis yang akan diubah oleh JavaScript -->
+            <input type="email" class="form-control" id="identifier" placeholder="Enter your email" aria-label="Email">
+            <label for="identifier" id="identifier-label">Enter your email</label>
           </div>
           <div class="form-floating mb-3">
             <input type="password" class="form-control" id="password" placeholder="Password">
@@ -34,6 +41,26 @@
 
   <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
   <script>
+    //Penanganan tombol login menggunakan email/phone number
+    document.getElementById('toggle-login').addEventListener('click', function() {
+      var identifierInput = document.getElementById('identifier');
+      var identifierLabel = document.getElementById('identifier-label');
+      var toggleButton = document.getElementById('toggle-login');
+
+      // Check the current state and toggle between email and phone number
+      if (identifierInput.getAttribute('type') === 'text') {
+        identifierInput.setAttribute('type', 'email');
+        identifierInput.setAttribute('placeholder', 'Enter your email');
+        identifierLabel.innerText = 'Enter your email';
+        toggleButton.innerText = 'Use Phone Number';
+      } else {
+        identifierInput.setAttribute('type', 'text'); // Gunakan type "text" untuk nomor telepon
+        identifierInput.setAttribute('placeholder', 'Enter your phone number');
+        identifierLabel.innerText = 'Enter your phone number';
+        toggleButton.innerText = 'Use Email';
+      }
+    });
+
     $(document).ready(function() {
       $.ajaxSetup({
         headers: {
@@ -43,14 +70,14 @@
 
       $('#user-login-form').on('submit', function(e) {
         e.preventDefault();
-        var email = $('#email').val();
+        var identifier = $('#identifier').val();
         var password = $('#password').val();
 
         $.ajax({
           url: '/api/auth/login',
           type: 'POST',
           data: {
-            email: email,
+            identifier: identifier,
             password: password
           },
           success: function(response) {
