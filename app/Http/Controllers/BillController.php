@@ -69,6 +69,9 @@ class BillController extends Controller
             'thn_bl' => 'required|string|size:6',
             'meter_awal' => 'required|integer',
             'meter_akhir' => 'required|integer',
+            'tunggakan_1' => 'nullable|integer',
+            'tunggakan_2' => 'nullable|integer',
+            'tunggakan_3' => 'nullable|integer',
         ]);
         
         if ($data['meter_akhir'] < $data['meter_awal']) {
@@ -85,14 +88,14 @@ class BillController extends Controller
 
                             if ($previousBill) {
                                 $totalTagihanBulanLalu = $previousBill->tag_now;
-                                $tunggakan_1 = $previousBill->tunggakan_1;
-                                $tunggakan_2 = $previousBill->tunggakan_2;
-                                $tunggakan_3 = $previousBill->tunggakan_3;
+                                $tunggakan_1 = $previousBill->tunggakan_1 ?? 0;
+                                $tunggakan_2 = $previousBill->tunggakan_2 ?? 0;
+                                $tunggakan_3 = $previousBill->tunggakan_3 ?? 0;
                                 $lastMonthPaid = $previousBill->paid; 
                             
                                 if ($lastMonthPaid == 0) {
-                                    if ($tunggakan_1 != null) {
-                                        if ($tunggakan_2 != null) {
+                                    if ($tunggakan_1 != 0) {
+                                        if ($tunggakan_2 != 0) {
                                             $data['tunggakan_3'] = $tunggakan_3 + $tunggakan_2;
                                             $data['tunggakan_2'] = $tunggakan_1;
                                             $data['tunggakan_1'] = $totalTagihanBulanLalu;
@@ -149,7 +152,6 @@ class BillController extends Controller
                 return response()->json(['error' => 'Bill not found'], 404); 
             }
         } catch (\Exception $e) {
-            Log::error('Error fetching meter awal: '.$e->getMessage());
             return response()->json(['message' => 'Internal Server Error'], 500);
         }
     }

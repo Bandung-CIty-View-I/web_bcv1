@@ -72,7 +72,8 @@
                                         <th scope="col">Nomor Kavling</th>
                                         <th scope="col">Meter Awal</th>
                                         <th scope="col">Meter Akhir</th>
-                                        <th scope="col">Tagihan</th>
+                                        <th scope="col">Tunggakan</th>
+                                        <th scope="col">Grand Total</th>
                                     </tr>
                                 </thead>
                                 <tbody id="bill-table-body">
@@ -167,6 +168,8 @@ $(document).ready(function() {
 
                 if (response.length > 0) {
                     response.forEach(function(bill) {
+                        var totalTunggakan = bill.tunggakan_1 + bill.tunggakan_2 + bill.tunggakan_3;
+
                         var row = `
                             <tr>
                                 <th scope="row">${bill.thn_bl.substring(0, 4)}</th>
@@ -175,6 +178,7 @@ $(document).ready(function() {
                                 <td>${bill.user.nomor_kavling}</td>
                                 <td>${bill.meter_awal} M<sup>3</sup></td>
                                 <td>${bill.meter_akhir} M<sup>3</sup></td>
+                                <td>Rp${totalTunggakan.toLocaleString('id-ID')}</td>
                                 <td>Rp${bill.total_tag.toLocaleString('id-ID')}</td>
                             </tr>
                         `;

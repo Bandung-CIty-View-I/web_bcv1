@@ -130,7 +130,6 @@
             const currentMonthName = listMonthName[d.getMonth()+1];
 
             // Cetak ke konsol (untuk debugging)
-            console.log(currentMonthName);
 
             // Tampilkan nama bulan di elemen HTML dengan id "monthName"
             document.getElementById('monthName').textContent = currentMonthName;
@@ -151,7 +150,7 @@
                 $('#nama-user').text(response.nama);
             },
             error: function(xhr, status, error) {
-                console.error('Failed to fetch admin data:', error);
+                console.error('Failed to fetch admin data:');
             }
         });
 
@@ -180,7 +179,7 @@
                         $('#userIdInput').val(''); 
                         $('#meterAwalInput').val('');
                         $('#iplInput').val('');
-                        console.error('Failed to fetch name:', error);
+                        console.error('Failed to fetch name:');
                     }
                 });
             }
@@ -199,7 +198,6 @@
             }
             
             let thn_bl = year+nextMonthFinal;
-            console.log(thn_bl);
             return thn_bl;
         }
 
@@ -216,7 +214,7 @@
                 },
                 error: function(xhr, status, error) {
                     $('#meterAwalInput').val(''); 
-                    console.error('Failed to fetch meter awal:', error);
+                    console.error('Failed to fetch meter awal:');
                 }
             });
         }
@@ -251,7 +249,6 @@
                     window.location.href = '/tagihanipladmin';
                 },
                 error: function(xhr, status, error) {
-                    console.error('Failed to add bill:', error);
                     alert('Pendaftaran tagihan gagal');
                 }
             });
