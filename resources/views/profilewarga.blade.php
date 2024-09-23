@@ -84,20 +84,6 @@
                                         <button class="btn btn-secondary mt-3" id="edit-profile-btn" style="color: black; font-weight: bold">Edit Profile</button>
                                     </div>
                                             <script>
-                                                function togglePassword() {
-                                                    var passwordInput = document.getElementById("user-password");
-                                                    var toggleIcon = document.getElementById("toggleIcon");
-                                                    if (passwordInput.type === "password") {
-                                                        passwordInput.type = "text";
-                                                        toggleIcon.classList.remove("bi-eye-slash");
-                                                        toggleIcon.classList.add("bi-eye");
-                                                    } else {
-                                                        passwordInput.type = "password";
-                                                        toggleIcon.classList.remove("bi-eye");
-                                                        toggleIcon.classList.add("bi-eye-slash");
-                                                    }
-                                                }
-
                                                 $(document).ready(function() {
                                                     $.ajax({
                                                         url: '/api/user/profile',
@@ -111,7 +97,6 @@
                                                             $('#view-no-kavling').text(response.nomor_kavling);
                                                             $('#user-blok').append(response.blok_cluster);
                                                             $('#view-no-hp').text(response.no_hp);
-                                                            $('#user-password').val('password');
 
                                                             $('#edit-nama').val(response.nama);
                                                             $('#edit-no-kavling').val(response.nomor_kavling);
