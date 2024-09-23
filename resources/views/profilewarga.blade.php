@@ -72,7 +72,7 @@
                                             <p id="view-no-hp"></p>
                                             <form id="update-profile-form" class="d-none">
                                                 <input type="text" id="edit-nama" class="form-control mb-2 form-control-transparent">
-                                                <input type="text" id="edit-no-kavling" class="form-control mb-2 form-control-transparent">
+                                                <input type="text" id="edit-no-kavling" class="form-control mb-2 form-control-transparent" style="background-color: #aaaaaa;" readonly>
                                                 <input type="text" id="edit-no-hp" class="form-control mb-2 form-control-transparent">
                                                 <button type="submit" class="btn btn-primary mt-2">Submit</button>
                                             </form>
@@ -80,10 +80,8 @@
                                     </div>
                                 </div>
                                 <div class="col d-flex flex-column">
-                                    <div class="mt-3" style="font-weight: bold">
-                                        <p>Ubah Detail Profile</p>
-                                        <hr style="border-top: 2px solid black; margin-bottom : 0px; margin-top: 0px;">
-                                        <button class="btn btn-secondary mt-3" id="edit-profile-btn" style="color: black">Edit Profile</button>
+                                    <div class="mt-1">
+                                        <button class="btn btn-secondary mt-3" id="edit-profile-btn" style="color: black; font-weight: bold">Edit Profile</button>
                                     </div>
                                             <script>
                                                 function togglePassword() {
@@ -134,7 +132,6 @@
                                                         e.preventDefault();
                                                         const data = {
                                                             nama: $('#edit-nama').val(),
-                                                            nomor_kavling: $('#edit-no-kavling').val(),
                                                             no_hp: $('#edit-no-hp').val(),
                                                         };
 

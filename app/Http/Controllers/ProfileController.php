@@ -20,8 +20,6 @@ class ProfileController extends Controller
 
         $validatedData = $request->validate([
             'nama' => 'sometimes|required|string|max:255',
-            'nomor_kavling' => 'sometimes|required|string|max:255',
-            'blok_cluster' => 'sometimes|required|string|max:255',
             'no_hp' => 'sometimes|required|string|max:255',
         ]);
 
