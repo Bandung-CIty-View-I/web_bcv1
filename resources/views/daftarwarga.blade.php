@@ -73,11 +73,19 @@
                                         <label for="noHP" class="form-label">No. HP</label>
                                         <input type="text" class="form-control input-custom" id="noHP" placeholder="Masukkan nomor HP warga" required>
                                     </div>
+                                    <div class="mb-3">
+                                        <label for="rt" class="form-label">RT</label>
+                                        <input type="text" class="form-control input-custom" id="rt" placeholder="Masukkan nomor RT">
+                                    </div>
                                 </div>
                                 <div class="col-md-6">
                                     <div class="mb-3">
+                                        <label for="ipl" class="form-label">IPL</label>
+                                        <input type="number" class="form-control input-custom" id="ipl" placeholder="Masukkan harga IPL">
+                                    </div>
+                                    <div class="mb-3">
                                         <label for="email" class="form-label">Email</label>
-                                        <input type="email" class="form-control input-custom" id="email" placeholder="Masukkan email warga" required>
+                                        <input type="email" class="form-control input-custom" id="email" placeholder="Masukkan email warga">
                                     </div>
                                     <div class="mb-3">
                                         <label for="idPelangganOnline" class="form-label">ID Pelanggan Online</label>
@@ -123,11 +131,13 @@
                     nama: $('#nama').val(),
                     blok_cluster: $('#blok').val(),
                     nomor_kavling: $('#nomorKavling').val(),
+                    rt: $('#rt').val().toString(),
+                    ipl: parseInt($('#ipl').val(), 10),
                     no_hp: $('#noHP').val(),
                     email: $('#email').val(),
                     id_pelanggan_online: $('#idPelangganOnline').val(),
                     password: $('#password').val(),
-                    password_confirmation: $('#password_confirmation').val()
+                    password_confirmation: $('#password_confirmation').val(),
                 };
 
                 $.ajax({

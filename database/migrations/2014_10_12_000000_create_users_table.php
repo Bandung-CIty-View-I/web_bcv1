@@ -11,10 +11,11 @@ class CreateUsersTable extends Migration
         Schema::create('users', function (Blueprint $table) {
             $table->id();
             $table->string('nama');
-            $table->string('email')->unique();
-            $table->string('blok_cluster');
+            $table->string('email')->nullable();
+            $table->string('blok_cluster')->nullable();
             $table->string('nomor_kavling');
             $table->string('no_hp')->unique();
+            $table->string('rt');
             $table->integer('ipl');
             $table->string('password');
             $table->string('role')->default('warga');

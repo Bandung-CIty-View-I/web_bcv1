@@ -18,11 +18,13 @@ class UserController extends Controller
     {
         $validatedData = $request->validate([
             'nama' => 'required|string|max:255',
-            'email' => 'required|string|email|max:255|unique:users',
+            'email' => 'nullable|string|email|max:255',
             'password' => 'required|string|min:8',
             'nomor_kavling' => 'required|string|max:255',
-            'blok_cluster' => 'required|string|max:255',
-            'no_hp' => 'required|string|max:255',
+            'blok_cluster' => 'nullable|string|max:255',
+            'rt' => 'nullable|string|max:2',
+            'no_hp' => 'required|string|max:255|unique:users',
+            'ipl' => 'required|integer',
             'id_pelanggan_online' => 'required|string|max:255|unique:users',
         ]);
 
@@ -44,11 +46,11 @@ class UserController extends Controller
 
         $validatedData = $request->validate([
             'nama' => 'sometimes|required|string|max:255',
-            'email' => 'sometimes|required|string|email|max:255|unique:users,email,'.$id,
+            'email' => 'sometimes|required|string|email|max:255,'.$id,
             'password' => 'sometimes|required|string|min:8',
             'nomor_kavling' => 'sometimes|required|string|max:255',
             'blok_cluster' => 'sometimes|required|string|max:255',
-            'no_hp' => 'sometimes|required|string|max:255',
+            'no_hp' => 'sometimes|required|string|max:255|unique:users',
             'id_pelanggan_online' => 'sometimes|required|string|max:255|unique:users,id_pelanggan_online,'.$id,
         ]);
 
@@ -73,10 +75,12 @@ class UserController extends Controller
         $validatedData = $request->validate([
             'nama' => 'required|string|max:255',
             'blok_cluster' => 'required|string|max:255',
-            'no_hp' => 'required|string|max:255',
-            'email' => 'required|string|email|max:255|unique:users',
+            'no_hp' => 'required|string|max:255|unique:users',
+            'email' => 'required|string|email|max:255',
             'password' => 'required|string|min:8|confirmed',
             'nomor_kavling' => 'required|string|max:255',
+            'rt' => 'required|string|max:2',
+            'ipl' => 'required|integer',
             'id_pelanggan_online' => 'required|string|max:255|unique:users', 
         ]);
     
@@ -87,7 +91,9 @@ class UserController extends Controller
             'email' => $validatedData['email'],
             'password' => Hash::make($validatedData['password']),
             'role' => 'warga',
-            'nomor_kavling' => $validatedData['nomor_kavling'], 
+            'nomor_kavling' => $validatedData['nomor_kavling'],
+            'rt' => $validatedData['rt'],
+            'ipl' => $validatedData['ipl'],
             'id_pelanggan_online' => $validatedData['id_pelanggan_online'],
         ]);
     
