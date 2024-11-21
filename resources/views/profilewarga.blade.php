@@ -65,16 +65,35 @@
                                             <p>Nama</p>
                                             <p>Nomor Kavling</p>
                                             <p>No. HP</p>
+                                            <p>Email</p>
                                         </div>
                                         <div style="flex: 1;">
                                             <p id="view-nama"></p>
                                             <p id="view-no-kavling"></p>
                                             <p id="view-no-hp"></p>
+                                            <p id="view-email"></p>
                                             <form id="update-profile-form" class="d-none">
                                                 <input type="text" id="edit-nama" class="form-control mb-2 form-control-transparent">
                                                 <input type="text" id="edit-no-kavling" class="form-control mb-2 form-control-transparent" style="background-color: #aaaaaa;" readonly>
                                                 <input type="text" id="edit-no-hp" class="form-control mb-2 form-control-transparent">
+                                                <input type="email" id="edit-email" class="form-control mb-2 form-control-transparent">
                                                 <button type="submit" class="btn btn-primary mt-2">Submit</button>
+                                            </form>
+                                            <!-- Form Ubah Password -->
+                                            <form id="change-password-form" class="d-none mt-3">
+                                                <div class="form-group">
+                                                    <label for="current-password">Password Lama</label>
+                                                    <input type="password" id="current-password" class="form-control mb-2" placeholder="Masukkan password lama" required>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label for="new-password">Password Baru</label>
+                                                    <input type="password" id="new-password" name="new_password" class="form-control mb-2" placeholder="Masukkan password baru" required>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label for="confirm-password">Konfirmasi Password Baru</label>
+                                                    <input type="password" id="confirm-password" name="new_password_confirmation" class="form-control mb-2" placeholder="Konfirmasi password baru" required>
+                                                </div>
+                                                <button type="submit" class="btn btn-primary mt-2">Ubah Password</button>
                                             </form>
                                         </div>
                                     </div>
@@ -82,69 +101,9 @@
                                 <div class="col d-flex flex-column">
                                     <div class="mt-1">
                                         <button class="btn btn-secondary mt-3" id="edit-profile-btn" style="color: black; font-weight: bold">Edit Profile</button>
+                                        <button class="btn btn-secondary mt-3" id="edit-password-btn" style="color: black; font-weight: bold">Edit Password</button>
                                     </div>
-                                            <script>
-                                                $(document).ready(function() {
-                                                    $.ajax({
-                                                        url: '/api/user/profile',
-                                                        type: 'POST',
-                                                        headers: {
-                                                            'Authorization': 'Bearer ' + localStorage.getItem('token')
-                                                        },
-                                                        success: function(response) {
-                                                            $('#view-nama').text(response.nama);
-                                                            $('#nama-user').text(response.nama);
-                                                            $('#view-no-kavling').text(response.nomor_kavling);
-                                                            $('#user-blok').append(response.blok_cluster);
-                                                            $('#view-no-hp').text(response.no_hp);
 
-                                                            $('#edit-nama').val(response.nama);
-                                                            $('#edit-no-kavling').val(response.nomor_kavling);
-                                                            $('#edit-no-hp').val(response.no_hp);
-                                                        },
-                                                        error: function(xhr, status, error) {
-                                                            console.error('Failed to fetch profile data:', error);
-                                                        }
-                                                    });
-
-                                                    $('#edit-profile-btn').on('click', function() {
-                                                        $('#view-nama, #view-no-kavling, #view-no-hp').toggle();
-                                                        $('#update-profile-form').toggleClass('d-none');
-                                                        $('#edit-profile-btn').toggleClass('d-none');
-                                                    });
-
-                                                    $('#update-profile-form').on('submit', function(e) {
-                                                        e.preventDefault();
-                                                        const data = {
-                                                            nama: $('#edit-nama').val(),
-                                                            no_hp: $('#edit-no-hp').val(),
-                                                        };
-
-                                                        $.ajax({
-                                                            url: '/api/user/update',
-                                                            type: 'POST',
-                                                            headers: {
-                                                                'Authorization': 'Bearer ' + localStorage.getItem('token')
-                                                            },
-                                                            data: data,
-                                                            success: function(response) {
-                                                                alert('Profile updated successfully');
-
-                                                                $('#view-nama').text(response.nama);
-                                                                $('#view-no-kavling').text(response.nomor_kavling);
-                                                                $('#view-no-hp').text(response.no_hp);
-
-                                                                $('#view-nama, #view-no-kavling, #view-no-hp').toggle();
-                                                                $('#update-profile-form').toggleClass('d-none');
-                                                                $('#edit-profile-btn').toggleClass('d-none');
-                                                            },
-                                                            error: function(xhr, status, error) {
-                                                                console.error('Failed to update profile data:', error);
-                                                            }
-                                                        });
-                                                    });
-                                                });
-                                            </script>
                                         </div>
                                     </div>
                                 </div>
@@ -157,4 +116,106 @@
         </div>
     </div>
 </div>
+
+<script>
+$(document).ready(function() {
+    $.ajax({
+        url: '/api/user/profile',
+        type: 'POST',
+        headers: {
+            'Authorization': 'Bearer ' + localStorage.getItem('token')
+        },
+        success: function(response) {
+            $('#view-nama').text(response.nama);
+            $('#nama-user').text(response.nama);
+            $('#view-no-kavling').text(response.nomor_kavling);
+            $('#user-blok').append(response.blok_cluster);
+            $('#view-no-hp').text(response.no_hp);
+            $('#view-email').text(response.email);
+
+            $('#edit-nama').val(response.nama);
+            $('#edit-no-kavling').val(response.nomor_kavling);
+            $('#edit-no-hp').val(response.no_hp);
+            $('#edit-email').val(response.email);
+        },
+        error: function(xhr, status, error) {
+            console.error('Failed to fetch profile data:', error);
+        }
+    });
+
+    //Toggle Edit Profile
+    $('#edit-profile-btn').on('click', function() {
+        $('#view-nama, #view-no-kavling, #view-no-hp, #view-email').toggle();
+        $('#update-profile-form').toggleClass('d-none');
+        $('#edit-profile-btn').toggleClass('d-none');
+    });
+
+    // Toggle Edit Password
+    $('#edit-password-btn').on('click', function() {
+        $('#change-password-form').toggleClass('d-none');
+        $('#update-profile-form').addClass('d-none');
+    });
+
+    // Change Profile                                                    
+    $('#update-profile-form').on('submit', function(e) {
+        e.preventDefault();
+        const data = {
+            nama: $('#edit-nama').val(),
+            no_hp: $('#edit-no-hp').val(),
+            email: $('#edit-email').val(),
+        };
+
+        $.ajax({
+            url: '/api/user/update',
+            type: 'POST',
+            headers: {
+                'Authorization': 'Bearer ' + localStorage.getItem('token')
+            },
+            data: data,
+            success: function(response) {
+                alert('Profile updated successfully');
+
+                $('#view-nama').text(response.nama);
+                $('#view-no-kavling').text(response.nomor_kavling);
+                $('#view-no-hp').text(response.no_hp);
+                $('#view-email').text(response.email);
+
+                $('#view-nama, #view-no-kavling, #view-no-hp, #view-email').toggle();
+                $('#update-profile-form').toggleClass('d-none');
+                $('#edit-profile-btn').toggleClass('d-none');
+            },
+            error: function(xhr, status, error) {
+                console.error('Failed to update profile data:', error);
+            }
+        });
+    });
+
+    // Change Password
+    $('#change-password-form').on('submit', function(e) {
+        e.preventDefault();
+        const data = {
+            current_password: $('#current-password').val(),
+            new_password: $('#new-password').val(),
+            new_password_confirmation: $('#confirm-password').val(),
+        };
+
+        $.ajax({
+            url: '/api/user/change-password',
+            type: 'POST',
+            headers: {
+                'Authorization': 'Bearer ' + localStorage.getItem('token')
+            },
+            data: data,
+            success: function(response) {
+                alert('Password berhasil diubah!');
+                $('#change-password-form')[0].reset();
+                $('#change-password-form').toggleClass('d-none');
+            },
+            error: function(xhr) {
+                alert('Gagal mengubah password!');
+            }
+        });
+    });
+});
+</script>
 @endsection
