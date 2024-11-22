@@ -99,7 +99,15 @@
                                         <label for="password_confirmation" class="form-label">Konfirmasi Password</label>
                                         <input type="password" class="form-control input-custom" id="password_confirmation" placeholder="Konfirmasi password warga" required>
                                     </div>
+                                </div>
+                                <div class="d-flex justify-content-center">
                                     <button type="submit" class="mt-4 btn btn-custom" style="background-color: #28a745; border: none;">Submit</button>
+                                </div>
+                                <div class="d-flex justify-content-center mt-4">
+                                    <p>Import dari file excel?</p>
+                                </div>
+                                <div class="d-flex justify-content-center">
+                                    <a href="/import" class="btn btn-custom" style="background-color: #007bff; border: none;">Import</a>
                                 </div>
                             </div>
                         </form>

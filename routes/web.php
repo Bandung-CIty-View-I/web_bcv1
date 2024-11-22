@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\LoginController;
+use App\Http\Controllers\UserImportController;
 
 Route::get('/', function () {
     return view('home', [
@@ -81,6 +82,10 @@ Route::middleware(['auth:sanctum', 'checkRole:admin'])->group(function () {
             "title" => "Kondisi Air dan Alat"
         ]);
     });
+
+    Route::get('import', [UserImportController::class, 'showForm']);
+    Route::get('download-template', [UserImportController::class, 'downloadTemplate'])->name('download.template');
+    Route::post('import', [UserImportController::class, 'import'])->name('user.import');
 
     Route::middleware('auth:sanctum')->group(function () {
         Route::get('/daftarwarga', function () {
